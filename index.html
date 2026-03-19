@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Push / Pull / Legs — Home Gym Hypertrophy</title>
+<meta name="description" content="A complete 6-day Push/Pull/Legs hypertrophy program optimized for dumbbells, a bench, and a pull-up bar.">
+<meta name="theme-color" content="#0C0C0E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --push: #E8453C;
+    --pull: #3B82F6;
+    --legs: #10B981;
+    --bg: #0C0C0E;
+    --card: #131316;
+    --card-border: #1A1A1F;
+    --surface: #16161A;
+    --text: #E8E8ED;
+    --text-dim: #8888A0;
+    --text-muted: #666;
+    --text-faint: #555;
+    --text-ghost: #444;
+    --text-dead: #333;
+  }
+
+  body {
+    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 28px 20px 60px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 680px; margin: 0 auto; }
+
+  .label {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    transition: color 0.3s;
+  }
+
+  h1 {
+    font-family: 'Space Mono', monospace;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin: 6px 0;
+  }
+
+  .subtitle {
+    color: var(--text-dim);
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  /* ── Weekly Schedule Bar ── */
+  .schedule-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+  }
+
+  .schedule-btn {
+    flex: 1;
+    border: none;
+    border-radius: 9px;
+    padding: 10px 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    transition: background 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .schedule-btn.rest { cursor: default; }
+
+  .schedule-btn .day-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .schedule-btn .day-workout {
+    font-size: 11px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .schedule-btn .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    margin-top: 1px;
+    display: none;
+  }
+
+  .schedule-btn.active .dot { display: block; }
+
+  /* ── Day Tabs ── */
+  .day-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .day-tab {
+    flex: 1;
+    padding: 14px 12px;
+    border: 1.5px solid #222;
+    border-radius: 12px;
+    background: var(--card);
+    cursor: pointer;
+    transition: all 0.25s;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    color: inherit;
+  }
+
+  .day-tab-name {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 3px;
+    transition: color 0.2s;
+    color: var(--text-muted);
+  }
+
+  .day-tab-tag {
+    font-size: 11px;
+    color: var(--text-ghost);
+    transition: color 0.2s;
+  }
+
+  /* ── Progress Bar ── */
+  .progress-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding: 0 2px;
+  }
+
+  .progress-track {
+    flex: 1;
+    height: 3px;
+    background: #1E1E24;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease, background 0.3s;
+    width: 0%;
+  }
+
+  .progress-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'Space Mono', monospace;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  /* ── Exercise Cards ── */
+  .exercise-list { display: flex; flex-direction: column; gap: 6px; }
+
+  .exercise-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .exercise-card:hover { border-color: #2a2a30; }
+  .exercise-card.checked { opacity: 0.6; }
+
+  .checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    border: 2px solid #333;
+    background: transparent;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+
+  .checkbox svg { display: none; }
+  .exercise-card.checked .checkbox svg { display: block; }
+
+  .exercise-content { flex: 1; min-width: 0; }
+
+  .exercise-name {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    transition: all 0.2s;
+    color: #E0E0E8;
+  }
+
+  .exercise-card.checked .exercise-name {
+    text-decoration: line-through;
+    color: var(--text-muted);
+  }
+
+  .exercise-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .meta-label {
+    color: var(--text-faint);
+    margin-right: 4px;
+  }
+
+  .meta-value {
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+    transition: color 0.2s;
+  }
+
+  .exercise-notes {
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-top: 5px;
+    font-style: italic;
+    line-height: 1.4;
+  }
+
+  /* ── Gear Section ── */
+  .gear-toggle {
+    margin-top: 28px;
+    width: 100%;
+    padding: 14px 16px;
+    background: var(--surface);
+    border: 1px solid #222;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .gear-arrow {
+    font-size: 18px;
+    color: var(--text-muted);
+    transition: transform 0.25s;
+  }
+
+  .gear-arrow.open { transform: rotate(180deg); }
+
+  .gear-list {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .gear-list.open { display: flex; }
+
+  .gear-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+
+  .gear-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .gear-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #E0E0E8;
+  }
+
+  .gear-price {
+    font-size: 12px;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+    color: var(--legs);
+    background: rgba(16, 185, 129, 0.08);
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+
+  .gear-why {
+    font-size: 12px;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  /* ── Footer ── */
+  .principles {
+    margin-top: 28px;
+    padding: 16px;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .principles strong {
+    font-weight: 700;
+    color: #888;
+  }
+
+  .footer {
+    margin-top: 32px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-dead);
+    letter-spacing: 0.5px;
+  }
+
+  .footer a { color: var(--text-ghost); text-decoration: none; }
+  .footer a:hover { color: var(--text-muted); }
+
+  /* ── Mobile polish ── */
+  @media (max-width: 480px) {
+    h1 { font-size: 26px; }
+    .day-tab { padding: 10px 8px; }
+    .day-tab-name { font-size: 14px; }
+    .exercise-meta { gap: 10px; }
+    .schedule-btn .day-label { font-size: 9px; }
+    .schedule-btn .day-workout { font-size: 10px; }
+  }
+
+  /* ── Animate in ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-in {
+    animation: fadeUp 0.4s ease forwards;
+    opacity: 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="label" id="topLabel">Hypertrophy Program</div>
+  <h1>Push / Pull / Legs</h1>
+  <p class="subtitle">6 days on, 1 rest. Dumbbells + bench + pull-up bar. Track your sets below.</p>
+
+  <div class="schedule-bar" id="scheduleBar"></div>
+  <div class="day-tabs" id="dayTabs"></div>
+
+  <div class="progress-row">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0/7</span>
+  </div>
+
+  <div class="exercise-list" id="exerciseList"></div>
+
+  <button class="gear-toggle" id="gearToggle">
+    <span>Worth Buying</span>
+    <span class="gear-arrow" id="gearArrow">▾</span>
+  </button>
+  <div class="gear-list" id="gearList"></div>
+
+  <div class="principles">
+    <strong>Key principles: </strong>
+    Progressive overload every 1–2 weeks (add reps, then weight). Train 1–2 reps from failure on compounds, to failure on isolation. Eat 1g protein per lb bodyweight. Sleep 7–9 hours. Deload every 4–6 weeks.
+  </div>
+
+  <div class="footer">
+    Built for gains — open source on <a href="https://github.com" target="_blank">GitHub</a>
+  </div>
+</div>
+
+<script>
+const DAYS = [
+  {
+    name: "Push",
+    tag: "Chest · Shoulders · Triceps",
+    color: "#E8453C",
+    exercises: [
+      { name: "Dumbbell Bench Press", sets: "4", reps: "8–10", rest: "2 min", notes: "Control the eccentric (3 sec down). Go heavy." },
+      { name: "Incline Dumbbell Press", sets: "3", reps: "10–12", rest: "90 sec", notes: "30–45° angle. Squeeze at the top." },
+      { name: "Dumbbell Overhead Press", sets: "4", reps: "8–10", rest: "2 min", notes: "Seated or standing. Full lockout." },
+      { name: "Dumbbell Lateral Raises", sets: "4", reps: "12–15", rest: "60 sec", notes: "Slight forward lean. Pinky-up at top." },
+      { name: "Dumbbell Flyes", sets: "3", reps: "12–15", rest: "60 sec", notes: "Deep stretch at bottom. Slight bend in elbows." },
+      { name: "Overhead Tricep Extension", sets: "3", reps: "10–12", rest: "60 sec", notes: "Both hands on one dumbbell. Full stretch." },
+      { name: "Dumbbell Kickbacks", sets: "3", reps: "12–15", rest: "60 sec", notes: "Lock upper arm. Squeeze at extension." },
+    ],
+  },
+  {
+    name: "Pull",
+    tag: "Back · Biceps · Rear Delts",
+    color: "#3B82F6",
+    exercises: [
+      { name: "Pull-Ups (Weighted if possible)", sets: "4", reps: "6–10", rest: "2 min", notes: "Full dead hang to chin over bar. Add weight via backpack." },
+      { name: "Dumbbell Rows", sets: "4", reps: "8–10", rest: "90 sec", notes: "One arm at a time. Pull to hip, not chest." },
+      { name: "Chest-Supported Incline Row", sets: "3", reps: "10–12", rest: "90 sec", notes: "Lie face-down on incline bench. Great for upper back." },
+      { name: "Chin-Ups", sets: "3", reps: "AMRAP", rest: "2 min", notes: "Supinated grip. Excellent bicep + back builder." },
+      { name: "Dumbbell Reverse Flyes", sets: "4", reps: "12–15", rest: "60 sec", notes: "Bent over or chest-supported. Rear delts are key." },
+      { name: "Dumbbell Bicep Curls", sets: "3", reps: "10–12", rest: "60 sec", notes: "Alternating. No swinging — strict form." },
+      { name: "Incline Dumbbell Curls", sets: "3", reps: "10–12", rest: "60 sec", notes: "Sit on incline bench. Long head stretch." },
+    ],
+  },
+  {
+    name: "Legs",
+    tag: "Quads · Hamstrings · Glutes · Calves",
+    color: "#10B981",
+    exercises: [
+      { name: "Dumbbell Bulgarian Split Squats", sets: "4", reps: "8–10 /leg", rest: "90 sec", notes: "Rear foot on bench. THE king of dumbbell leg exercises." },
+      { name: "Dumbbell Romanian Deadlifts", sets: "4", reps: "10–12", rest: "90 sec", notes: "Hinge at hips. Feel the hamstring stretch." },
+      { name: "Dumbbell Goblet Squats", sets: "3", reps: "12–15", rest: "90 sec", notes: "Hold one heavy dumbbell at chest. Deep squat." },
+      { name: "Dumbbell Step-Ups", sets: "3", reps: "10–12 /leg", rest: "60 sec", notes: "Use bench height. Drive through front foot only." },
+      { name: "Dumbbell Hip Thrusts", sets: "3", reps: "12–15", rest: "60 sec", notes: "Back on bench. Squeeze glutes hard at top." },
+      { name: "Single-Leg Calf Raises", sets: "4", reps: "15–20", rest: "45 sec", notes: "Hold dumbbell. Full ROM — stretch & squeeze." },
+      { name: "Dumbbell Lunges (Walking)", sets: "3", reps: "12 /leg", rest: "60 sec", notes: "Long strides for glute emphasis, short for quads." },
+    ],
+  },
+];
+
+const SCHEDULE = [
+  { day: "Mon", workout: "Push", idx: 0 },
+  { day: "Tue", workout: "Pull", idx: 1 },
+  { day: "Wed", workout: "Legs", idx: 2 },
+  { day: "Thu", workout: "Rest", idx: -1 },
+  { day: "Fri", workout: "Push", idx: 0 },
+  { day: "Sat", workout: "Pull", idx: 1 },
+  { day: "Sun", workout: "Legs", idx: 2 },
+];
+
+const GEAR = [
+  { name: "Resistance Bands Set", price: "$15–30", why: "Replaces cable machine for face pulls, tricep pushdowns, lateral raises, and banded leg curls. Huge value." },
+  { name: "Dip Belt or Heavy Backpack", price: "$20–35", why: "Makes pull-ups and chin-ups progressively overloadable — essential for back & arm growth." },
+  { name: "Adjustable Dumbbells (heavier)", price: "$80–200", why: "If your current dumbbells max out, you'll stall. Progressive overload is non-negotiable." },
+];
+
+let activeDay = 0;
+let gearOpen = false;
+const checked = {};
+
+function render() {
+  const current = DAYS[activeDay];
+
+  // Top label color
+  document.getElementById('topLabel').style.color = current.color;
+
+  // Schedule bar
+  const bar = document.getElementById('scheduleBar');
+  bar.innerHTML = SCHEDULE.map((s, i) => {
+    const isRest = s.idx === -1;
+    const isActive = !isRest && s.idx === activeDay;
+    const c = isRest ? '#333' : DAYS[s.idx].color;
+    return `<button class="schedule-btn ${isRest ? 'rest' : ''} ${isActive ? 'active' : ''}"
+      data-idx="${s.idx}" style="background:${isActive ? c + '18' : 'transparent'}">
+      <span class="day-label" style="color:${isRest ? '#444' : isActive ? c : '#666'}">${s.day}</span>
+      <span class="day-workout" style="color:${isRest ? '#333' : isActive ? c : '#555'}">${s.workout}</span>
+      <span class="dot" style="background:${c}"></span>
+    </button>`;
+  }).join('');
+
+  bar.querySelectorAll('.schedule-btn:not(.rest)').forEach(btn => {
+    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); render(); });
+  });
+
+  // Day tabs
+  const tabs = document.getElementById('dayTabs');
+  tabs.innerHTML = DAYS.map((d, i) => {
+    const active = i === activeDay;
+    return `<button class="day-tab" data-idx="${i}" style="
+      border-color:${active ? d.color + '55' : '#222'};
+      background:${active ? d.color + '10' : 'var(--card)'};">
+      <div class="day-tab-name" style="color:${active ? d.color : 'var(--text-muted)'}">${d.name}</div>
+      <div class="day-tab-tag" style="color:${active ? '#999' : 'var(--text-ghost)'}">${d.tag}</div>
+    </button>`;
+  }).join('');
+
+  tabs.querySelectorAll('.day-tab').forEach(btn => {
+    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); render(); });
+  });
+
+  // Progress
+  const completedCount = current.exercises.filter((_, i) => checked[`${activeDay}-${i}`]).length;
+  const pct = (completedCount / current.exercises.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressFill').style.background = current.color;
+  document.getElementById('progressCount').textContent = `${completedCount}/${current.exercises.length}`;
+
+  // Exercises
+  const list = document.getElementById('exerciseList');
+  list.innerHTML = current.exercises.map((ex, i) => {
+    const isChecked = !!checked[`${activeDay}-${i}`];
+    const c = current.color;
+    return `<div class="exercise-card ${isChecked ? 'checked' : ''} animate-in" data-idx="${i}"
+      style="background:${isChecked ? c + '08' : 'var(--card)'};
+             border-color:${isChecked ? c + '30' : 'var(--card-border)'};
+             animation-delay:${i * 0.04}s">
+      <div class="checkbox" style="
+        border-color:${isChecked ? c : '#333'};
+        background:${isChecked ? c : 'transparent'};">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="exercise-content">
+        <div class="exercise-name">${ex.name}</div>
+        <div class="exercise-meta">
+          <span class="meta-item"><span class="meta-label">Sets</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${ex.sets}</span></span>
+          <span class="meta-item"><span class="meta-label">Reps</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${ex.reps}</span></span>
+          <span class="meta-item"><span class="meta-label">Rest</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${ex.rest}</span></span>
+        </div>
+        <div class="exercise-notes">${ex.notes}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  list.querySelectorAll('.exercise-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const key = `${activeDay}-${card.dataset.idx}`;
+      checked[key] = !checked[key];
+      render();
+    });
+  });
+
+  // Gear
+  const gearList = document.getElementById('gearList');
+  gearList.innerHTML = GEAR.map(g => `
+    <div class="gear-card">
+      <div class="gear-header">
+        <span class="gear-name">${g.name}</span>
+        <span class="gear-price">${g.price}</span>
+      </div>
+      <div class="gear-why">${g.why}</div>
+    </div>`).join('');
+}
+
+// Gear toggle
+document.getElementById('gearToggle').addEventListener('click', () => {
+  gearOpen = !gearOpen;
+  document.getElementById('gearList').classList.toggle('open', gearOpen);
+  document.getElementById('gearArrow').classList.toggle('open', gearOpen);
+});
+
+render();
+</script>
+</body>
+</html>
