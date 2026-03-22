@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Push / Pull / Legs — Home Gym Hypertrophy</title>
-<meta name="description" content="A complete 6-day Push/Pull/Legs hypertrophy program optimized for dumbbells, a bench, and a pull-up bar.">
+<meta name="description" content="A complete 6-day Push/Pull/Legs hypertrophy program with mobility and posture routines. Dumbbells, bench, pull-up bar.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +16,8 @@
     --push: #E8453C;
     --pull: #3B82F6;
     --legs: #10B981;
+    --posture: #A855F7;
+    --mobility: #F59E0B;
     --bg: #0C0C0E;
     --card: #131316;
     --card-border: #1A1A1F;
@@ -64,6 +66,43 @@
     margin-bottom: 24px;
   }
 
+  /* ── Main Section Nav ── */
+  .section-nav {
+    display: flex;
+    gap: 4px;
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 28px;
+  }
+
+  .section-btn {
+    flex: 1;
+    border: none;
+    border-radius: 9px;
+    padding: 11px 8px;
+    cursor: pointer;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all 0.25s;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .section-btn.active {
+    background: #1E1E24;
+    color: var(--text);
+  }
+
+  .section-btn .section-icon {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 2px;
+  }
+
   /* ── Weekly Schedule Bar ── */
   .schedule-bar {
     display: flex;
@@ -92,110 +131,70 @@
   .schedule-btn.rest { cursor: default; }
 
   .schedule-btn .day-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    transition: color 0.2s;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
   }
 
   .schedule-btn .day-workout {
-    font-size: 11px;
-    font-weight: 500;
-    transition: color 0.2s;
+    font-size: 11px; font-weight: 500;
   }
 
   .schedule-btn .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    margin-top: 1px;
-    display: none;
+    width: 4px; height: 4px; border-radius: 50%;
+    margin-top: 1px; display: none;
   }
 
   .schedule-btn.active .dot { display: block; }
 
   /* ── Day Tabs ── */
-  .day-tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-  }
+  .day-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
 
   .day-tab {
-    flex: 1;
-    padding: 14px 12px;
-    border: 1.5px solid #222;
-    border-radius: 12px;
-    background: var(--card);
-    cursor: pointer;
-    transition: all 0.25s;
-    text-align: left;
-    font-family: 'DM Sans', sans-serif;
-    color: inherit;
+    flex: 1; padding: 14px 12px;
+    border: 1.5px solid #222; border-radius: 12px;
+    background: var(--card); cursor: pointer;
+    transition: all 0.25s; text-align: left;
+    font-family: 'DM Sans', sans-serif; color: inherit;
   }
 
   .day-tab-name {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 16px; font-weight: 700;
     font-family: 'Space Mono', monospace;
-    margin-bottom: 3px;
-    transition: color 0.2s;
-    color: var(--text-muted);
+    margin-bottom: 3px; color: var(--text-muted);
   }
 
-  .day-tab-tag {
-    font-size: 11px;
-    color: var(--text-ghost);
-    transition: color 0.2s;
-  }
+  .day-tab-tag { font-size: 11px; color: var(--text-ghost); }
 
   /* ── Progress Bar ── */
   .progress-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    padding: 0 2px;
+    display: flex; align-items: center;
+    gap: 12px; margin-bottom: 20px; padding: 0 2px;
   }
 
   .progress-track {
-    flex: 1;
-    height: 3px;
-    background: #1E1E24;
-    border-radius: 4px;
-    overflow: hidden;
+    flex: 1; height: 3px; background: #1E1E24;
+    border-radius: 4px; overflow: hidden;
   }
 
   .progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.4s ease, background 0.3s;
-    width: 0%;
+    height: 100%; border-radius: 4px;
+    transition: width 0.4s ease, background 0.3s; width: 0%;
   }
 
   .progress-count {
-    font-size: 12px;
-    color: var(--text-muted);
+    font-size: 12px; color: var(--text-muted);
     font-family: 'Space Mono', monospace;
-    min-width: 40px;
-    text-align: right;
+    min-width: 40px; text-align: right;
   }
 
-  /* ── Exercise Cards ── */
+  /* ── Cards ── */
   .exercise-list { display: flex; flex-direction: column; gap: 6px; }
 
   .exercise-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    user-select: none;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 14px 16px; cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: flex-start;
+    gap: 12px; user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -203,17 +202,10 @@
   .exercise-card.checked { opacity: 0.6; }
 
   .checkbox {
-    width: 20px;
-    height: 20px;
-    border-radius: 6px;
-    border: 2px solid #333;
-    background: transparent;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-    margin-top: 1px;
+    width: 20px; height: 20px; border-radius: 6px;
+    border: 2px solid #333; background: transparent;
+    flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; transition: all 0.2s; margin-top: 1px;
   }
 
   .checkbox svg { display: none; }
@@ -222,148 +214,129 @@
   .exercise-content { flex: 1; min-width: 0; }
 
   .exercise-name {
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    transition: all 0.2s;
-    color: #E0E0E8;
+    font-size: 14px; font-weight: 600; margin-bottom: 5px;
+    color: #E0E0E8; transition: all 0.2s;
   }
 
   .exercise-card.checked .exercise-name {
-    text-decoration: line-through;
-    color: var(--text-muted);
+    text-decoration: line-through; color: var(--text-muted);
   }
 
-  .exercise-meta {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .meta-item {
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  .meta-label {
-    color: var(--text-faint);
-    margin-right: 4px;
-  }
+  .exercise-meta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .meta-item { font-size: 12px; color: var(--text-muted); }
+  .meta-label { color: var(--text-faint); margin-right: 4px; }
 
   .meta-value {
-    font-weight: 600;
-    font-family: 'Space Mono', monospace;
-    transition: color 0.2s;
+    font-weight: 600; font-family: 'Space Mono', monospace;
   }
 
   .exercise-notes {
-    font-size: 12px;
-    color: var(--text-faint);
-    margin-top: 5px;
-    font-style: italic;
-    line-height: 1.4;
+    font-size: 12px; color: var(--text-faint);
+    margin-top: 5px; font-style: italic; line-height: 1.4;
   }
 
-  /* ── Gear Section ── */
+  .target-badge {
+    display: inline-block; font-size: 10px; font-weight: 700;
+    font-family: 'Space Mono', monospace; letter-spacing: 0.5px;
+    padding: 2px 7px; border-radius: 5px; margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* ── Section Header ── */
+  .section-header {
+    margin-bottom: 16px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px; font-weight: 700; margin-bottom: 4px;
+  }
+
+  .section-desc {
+    font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  }
+
+  .section-time {
+    font-size: 11px; font-family: 'Space Mono', monospace;
+    margin-top: 6px; opacity: 0.8;
+  }
+
+  .focus-areas {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+
+  .focus-pill {
+    font-size: 11px; font-weight: 600; padding: 5px 10px;
+    border-radius: 8px; background: var(--card);
+    border: 1px solid var(--card-border); color: var(--text-dim);
+  }
+
+  /* ── Gear ── */
   .gear-toggle {
-    margin-top: 28px;
-    width: 100%;
-    padding: 14px 16px;
-    background: var(--surface);
-    border: 1px solid #222;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
+    margin-top: 28px; width: 100%; padding: 14px 16px;
+    background: var(--surface); border: 1px solid #222;
+    border-radius: 12px; cursor: pointer; display: flex;
+    justify-content: space-between; align-items: center;
+    color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 600;
   }
 
   .gear-arrow {
-    font-size: 18px;
-    color: var(--text-muted);
+    font-size: 18px; color: var(--text-muted);
     transition: transform 0.25s;
   }
 
   .gear-arrow.open { transform: rotate(180deg); }
 
   .gear-list {
-    display: none;
-    flex-direction: column;
-    gap: 6px;
-    margin-top: 6px;
+    display: none; flex-direction: column;
+    gap: 6px; margin-top: 6px;
   }
 
   .gear-list.open { display: flex; }
 
   .gear-card {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 14px 16px;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 12px; padding: 14px 16px;
   }
 
   .gear-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 5px;
   }
 
-  .gear-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: #E0E0E8;
-  }
+  .gear-name { font-size: 14px; font-weight: 600; color: #E0E0E8; }
 
   .gear-price {
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 12px; font-weight: 700;
     font-family: 'Space Mono', monospace;
-    color: var(--legs);
-    background: rgba(16, 185, 129, 0.08);
-    padding: 3px 8px;
-    border-radius: 6px;
+    color: var(--legs); background: rgba(16, 185, 129, 0.08);
+    padding: 3px 8px; border-radius: 6px;
   }
 
-  .gear-why {
-    font-size: 12px;
-    color: #777;
-    line-height: 1.5;
-  }
+  .gear-why { font-size: 12px; color: #777; line-height: 1.5; }
 
   /* ── Footer ── */
   .principles {
-    margin-top: 28px;
-    padding: 16px;
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    font-size: 12px;
-    color: var(--text-muted);
-    line-height: 1.7;
+    margin-top: 28px; padding: 16px;
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 12px; font-size: 12px;
+    color: var(--text-muted); line-height: 1.7;
   }
 
-  .principles strong {
-    font-weight: 700;
-    color: #888;
-  }
+  .principles strong { font-weight: 700; color: #888; }
 
   .footer {
-    margin-top: 32px;
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-dead);
-    letter-spacing: 0.5px;
+    margin-top: 32px; text-align: center;
+    font-size: 11px; color: var(--text-dead); letter-spacing: 0.5px;
   }
 
   .footer a { color: var(--text-ghost); text-decoration: none; }
   .footer a:hover { color: var(--text-muted); }
 
-  /* ── Mobile polish ── */
+  .hidden { display: none !important; }
+
   @media (max-width: 480px) {
     h1 { font-size: 26px; }
     .day-tab { padding: 10px 8px; }
@@ -371,47 +344,92 @@
     .exercise-meta { gap: 10px; }
     .schedule-btn .day-label { font-size: 9px; }
     .schedule-btn .day-workout { font-size: 10px; }
+    .section-btn { font-size: 11px; padding: 10px 4px; }
   }
 
-  /* ── Animate in ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .animate-in {
-    animation: fadeUp 0.4s ease forwards;
-    opacity: 0;
-  }
+  .animate-in { animation: fadeUp 0.4s ease forwards; opacity: 0; }
 </style>
 </head>
 <body>
 <div class="container">
   <div class="label" id="topLabel">Hypertrophy Program</div>
   <h1>Push / Pull / Legs</h1>
-  <p class="subtitle">6 days on, 1 rest. Dumbbells + bench + pull-up bar. Track your sets below.</p>
+  <p class="subtitle">6 days on, 1 rest. Dumbbells + bench + pull-up bar.</p>
 
-  <div class="schedule-bar" id="scheduleBar"></div>
-  <div class="day-tabs" id="dayTabs"></div>
-
-  <div class="progress-row">
-    <div class="progress-track">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-    <span class="progress-count" id="progressCount">0/7</span>
+  <div class="section-nav" id="sectionNav">
+    <button class="section-btn active" data-section="workout">
+      <span class="section-icon">🏋</span>Workout
+    </button>
+    <button class="section-btn" data-section="mobility">
+      <span class="section-icon">⚡</span>Pre-Workout
+    </button>
+    <button class="section-btn" data-section="posture">
+      <span class="section-icon">🧍</span>Daily Posture
+    </button>
   </div>
 
-  <div class="exercise-list" id="exerciseList"></div>
+  <!-- ═══ WORKOUT ═══ -->
+  <div id="workoutSection">
+    <div class="schedule-bar" id="scheduleBar"></div>
+    <div class="day-tabs" id="dayTabs"></div>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <span class="progress-count" id="progressCount">0/7</span>
+    </div>
+    <div class="exercise-list" id="exerciseList"></div>
+    <button class="gear-toggle" id="gearToggle">
+      <span>Worth Buying</span>
+      <span class="gear-arrow" id="gearArrow">▾</span>
+    </button>
+    <div class="gear-list" id="gearList"></div>
+    <div class="principles">
+      <strong>Key principles: </strong>
+      Progressive overload every 1–2 weeks (add reps, then weight). Train 1–2 reps from failure on compounds, to failure on isolation. Eat 1g protein per lb bodyweight. Sleep 7–9 hours. Deload every 4–6 weeks.
+    </div>
+  </div>
 
-  <button class="gear-toggle" id="gearToggle">
-    <span>Worth Buying</span>
-    <span class="gear-arrow" id="gearArrow">▾</span>
-  </button>
-  <div class="gear-list" id="gearList"></div>
+  <!-- ═══ PRE-WORKOUT MOBILITY ═══ -->
+  <div id="mobilitySection" class="hidden">
+    <div class="day-tabs" id="mobilityDayTabs"></div>
+    <div class="section-header" id="mobilityHeader"></div>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="mobilityProgressFill"></div></div>
+      <span class="progress-count" id="mobilityProgressCount">0/4</span>
+    </div>
+    <div class="exercise-list" id="mobilityList"></div>
+    <div class="principles" style="margin-top:20px">
+      <strong>When to do this: </strong>
+      Right before lifting. Move through each exercise with control — not a rush. Avoid static holds longer than 30 sec before heavy compounds. Save deeper stretches for after your session or the posture routine.
+    </div>
+  </div>
 
-  <div class="principles">
-    <strong>Key principles: </strong>
-    Progressive overload every 1–2 weeks (add reps, then weight). Train 1–2 reps from failure on compounds, to failure on isolation. Eat 1g protein per lb bodyweight. Sleep 7–9 hours. Deload every 4–6 weeks.
+  <!-- ═══ DAILY POSTURE ═══ -->
+  <div id="postureSection" class="hidden">
+    <div class="section-header">
+      <div class="section-title" style="color: var(--posture)">Daily Posture Reset</div>
+      <div class="section-desc">Fixes the 4 biggest posture problems from desk life. Do this daily — morning, rest days, or post-workout. Consistency beats intensity.</div>
+      <div class="section-time" style="color: var(--posture)">~12 min</div>
+    </div>
+    <div class="focus-areas">
+      <span class="focus-pill" style="border-color:#A855F740">🔹 Forward Head</span>
+      <span class="focus-pill" style="border-color:#A855F740">🔹 Rounded Shoulders</span>
+      <span class="focus-pill" style="border-color:#A855F740">🔹 Upper Back Rounding</span>
+      <span class="focus-pill" style="border-color:#A855F740">🔹 Anterior Pelvic Tilt</span>
+    </div>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="postureProgressFill"></div></div>
+      <span class="progress-count" id="postureProgressCount">0/7</span>
+    </div>
+    <div class="exercise-list" id="postureList"></div>
+    <div class="principles" style="margin-top:20px">
+      <strong>Why these exercises: </strong>
+      Chin tucks and neck flexor holds pull your head back over your spine — this sharpens your jawline and eliminates "tech neck." Thoracic extensions and wall angels reverse upper-back rounding so you stand taller. Hip flexor stretches and glute activation fix anterior pelvic tilt, which flattens your stomach and adds visible height. Results compound over weeks — stay consistent.
+    </div>
   </div>
 
   <div class="footer">
@@ -420,25 +438,23 @@
 </div>
 
 <script>
+/* ═══ DATA ═══ */
+
 const DAYS = [
   {
-    name: "Push",
-    tag: "Chest · Shoulders · Triceps",
-    color: "#E8453C",
+    name: "Push", tag: "Chest · Shoulders · Triceps", color: "#E8453C",
     exercises: [
       { name: "Dumbbell Bench Press", sets: "4", reps: "8–10", rest: "2 min", notes: "Control the eccentric (3 sec down). Go heavy." },
       { name: "Incline Dumbbell Press", sets: "3", reps: "10–12", rest: "90 sec", notes: "30–45° angle. Squeeze at the top." },
       { name: "Dumbbell Overhead Press", sets: "4", reps: "8–10", rest: "2 min", notes: "Seated or standing. Full lockout." },
       { name: "Dumbbell Lateral Raises", sets: "4", reps: "12–15", rest: "60 sec", notes: "Slight forward lean. Pinky-up at top." },
       { name: "Dumbbell Flyes", sets: "3", reps: "12–15", rest: "60 sec", notes: "Deep stretch at bottom. Slight bend in elbows." },
-      { name: "Overhead Tricep Extension", sets: "3", reps: "10–12", rest: "60 sec", notes: "Both hands on one dumbbell. Full stretch." },
+      { name: "Dumbbell Skull Crushers", sets: "3", reps: "10–12", rest: "60 sec", notes: "Lie on bench, lower dumbbells to temples. Keep elbows locked in place — don't flare." },
       { name: "Dumbbell Kickbacks", sets: "3", reps: "12–15", rest: "60 sec", notes: "Lock upper arm. Squeeze at extension." },
     ],
   },
   {
-    name: "Pull",
-    tag: "Back · Biceps · Rear Delts",
-    color: "#3B82F6",
+    name: "Pull", tag: "Back · Biceps · Rear Delts", color: "#3B82F6",
     exercises: [
       { name: "Pull-Ups (Weighted if possible)", sets: "4", reps: "6–10", rest: "2 min", notes: "Full dead hang to chin over bar. Add weight via backpack." },
       { name: "Dumbbell Rows", sets: "4", reps: "8–10", rest: "90 sec", notes: "One arm at a time. Pull to hip, not chest." },
@@ -450,9 +466,7 @@ const DAYS = [
     ],
   },
   {
-    name: "Legs",
-    tag: "Quads · Hamstrings · Glutes · Calves",
-    color: "#10B981",
+    name: "Legs", tag: "Quads · Hamstrings · Glutes · Calves", color: "#10B981",
     exercises: [
       { name: "Dumbbell Bulgarian Split Squats", sets: "4", reps: "8–10 /leg", rest: "90 sec", notes: "Rear foot on bench. THE king of dumbbell leg exercises." },
       { name: "Dumbbell Romanian Deadlifts", sets: "4", reps: "10–12", rest: "90 sec", notes: "Hinge at hips. Feel the hamstring stretch." },
@@ -481,17 +495,140 @@ const GEAR = [
   { name: "Adjustable Dumbbells (heavier)", price: "$80–200", why: "If your current dumbbells max out, you'll stall. Progressive overload is non-negotiable." },
 ];
 
+const MOBILITY = [
+  {
+    name: "Push", color: "#E8453C",
+    desc: "Open up shoulders and thoracic spine so you can press safely through full range of motion.",
+    time: "~4 min",
+    exercises: [
+      { name: "Shoulder Dislocates (Band/Towel)", sets: "2", reps: "10", rest: "—", notes: "Wide grip, slow full arc overhead and behind. Opens shoulder capsule for pressing." },
+      { name: "Thoracic Rotations", sets: "1", reps: "8 /side", rest: "—", notes: "Quadruped position. Hand behind head, rotate open toward ceiling. Opens upper back." },
+      { name: "Scapular Push-Ups", sets: "1", reps: "12", rest: "—", notes: "Plank position. Protract and retract shoulder blades only. Wakes up serratus anterior." },
+      { name: "Light Warm-Up Sets", sets: "2", reps: "12–15", rest: "30 sec", notes: "First exercise at ~40% then ~60% working weight. Groove the movement pattern." },
+    ],
+  },
+  {
+    name: "Pull", color: "#3B82F6",
+    desc: "Decompress the spine and prime your lats and scapular retractors for pulling movements.",
+    time: "~4 min",
+    exercises: [
+      { name: "Dead Hang", sets: "2", reps: "20–30 sec", rest: "—", notes: "Full relaxed hang from pull-up bar. Decompresses spine, stretches lats and grip." },
+      { name: "Thoracic Extension over Bench", sets: "1", reps: "10", rest: "—", notes: "Upper back on bench edge. Arms overhead, extend back and return. Opens thoracic spine." },
+      { name: "Band Pull-Aparts", sets: "2", reps: "15", rest: "—", notes: "Arms straight forward, pull band to chest height. Fires up rear delts and rhomboids." },
+      { name: "Light Warm-Up Sets", sets: "2", reps: "8–10", rest: "30 sec", notes: "Easy pull-ups or light dumbbell rows at ~50% effort. Get blood flowing." },
+    ],
+  },
+  {
+    name: "Legs", color: "#10B981",
+    desc: "Unlock hips and ankles so you can squat deep and hinge without compensation patterns.",
+    time: "~5 min",
+    exercises: [
+      { name: "90/90 Hip Switches", sets: "1", reps: "8 /side", rest: "—", notes: "Seated on floor, rotate both legs side to side. Opens hip internal and external rotation." },
+      { name: "Half-Kneeling Hip Flexor Stretch", sets: "1", reps: "30 sec /side", rest: "—", notes: "Squeeze rear glute, tuck pelvis under. Feel this deep in the front hip." },
+      { name: "Bodyweight Deep Squat Hold", sets: "2", reps: "20 sec", rest: "—", notes: "Heels down, elbows pushing knees out. Hold a doorframe for balance if needed." },
+      { name: "Ankle Rocks", sets: "1", reps: "10 /side", rest: "—", notes: "Foot flat, drive knee over toes. Critical for deep squat mechanics." },
+      { name: "Glute Bridges", sets: "1", reps: "10", rest: "—", notes: "3 sec squeeze at top. Fires up glutes before heavy compound lifts." },
+    ],
+  },
+];
+
+const POSTURE = [
+  {
+    name: "Chin Tucks", sets: "3", reps: "12", rest: "—",
+    target: "Forward Head",
+    notes: "Pull chin straight back (make a double chin). Hold 2 sec each rep. THE #1 exercise for jawline and head-over-spine alignment.",
+  },
+  {
+    name: "Deep Neck Flexor Hold", sets: "3", reps: "15 sec", rest: "15 sec",
+    target: "Forward Head",
+    notes: "Lie face-up. Tuck chin, lift head 1 inch off floor and hold. Strengthens the muscles that keep your head stacked over your spine.",
+  },
+  {
+    name: "Wall Angels", sets: "3", reps: "10 (slow)", rest: "—",
+    target: "Rounded Shoulders",
+    notes: "Back flat on wall, arms in 'W'. Slide up to 'Y' and back down. Keep wrists and elbows touching wall the entire time — harder than it sounds.",
+  },
+  {
+    name: "Doorway Chest Stretch", sets: "2", reps: "30 sec /side", rest: "—",
+    target: "Rounded Shoulders",
+    notes: "Forearm on doorframe at 90°, step through gently. Do at both high and low arm angles. Opens the pecs pulling your shoulders forward.",
+  },
+  {
+    name: "Thoracic Extension (Towel Roll)", sets: "2", reps: "30 sec", rest: "—",
+    target: "Upper Back Rounding",
+    notes: "Roll up a towel, place under upper back, lie over it arms overhead. Or use bench edge. Directly reverses desk-posture hunch — this is what makes you look taller.",
+  },
+  {
+    name: "Half-Kneeling Hip Flexor Stretch", sets: "2", reps: "30 sec /side", rest: "—",
+    target: "Anterior Pelvic Tilt",
+    notes: "Rear knee down, squeeze that side's glute HARD, tuck pelvis under. Tight hip flexors tilt your pelvis forward — looks like a gut and shortens your frame.",
+  },
+  {
+    name: "Glute Bridge with 3s Hold", sets: "2", reps: "10", rest: "—",
+    target: "Anterior Pelvic Tilt",
+    notes: "Squeeze glutes at top for 3 full seconds per rep. Strengthens glutes to counteract hip flexor pull. Think: tilt belt buckle toward chin.",
+  },
+];
+
+/* ═══ STATE ═══ */
+
+let activeSection = 'workout';
 let activeDay = 0;
 let gearOpen = false;
 const checked = {};
+const mobilityChecked = {};
+const postureChecked = {};
 
-function render() {
+/* ═══ RENDER HELPERS ═══ */
+
+function renderCard(ex, i, colorHex, prefix, checkedMap) {
+  const isChecked = !!checkedMap[`${prefix}-${i}`];
+  const c = colorHex;
+  let metaHTML = '';
+  [
+    { label: "Sets", val: ex.sets },
+    { label: "Reps", val: ex.reps },
+    { label: "Rest", val: ex.rest },
+  ].forEach(m => {
+    if (m.val && m.val !== '—') {
+      metaHTML += `<span class="meta-item"><span class="meta-label">${m.label}</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${m.val}</span></span>`;
+    }
+  });
+
+  const badge = ex.target
+    ? `<span class="target-badge" style="background:${c}15;color:${c}">${ex.target}</span>` : '';
+
+  return `<div class="exercise-card ${isChecked ? 'checked' : ''} animate-in" data-idx="${i}"
+    style="background:${isChecked ? c + '08' : 'var(--card)'};
+           border-color:${isChecked ? c + '30' : 'var(--card-border)'};
+           animation-delay:${i * 0.04}s">
+    <div class="checkbox" style="border-color:${isChecked ? c : '#333'};background:${isChecked ? c : 'transparent'};">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+        <path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="exercise-content">
+      <div class="exercise-name">${ex.name}${badge}</div>
+      <div class="exercise-meta">${metaHTML}</div>
+      <div class="exercise-notes">${ex.notes}</div>
+    </div>
+  </div>`;
+}
+
+function bindCards(container, prefix, checkedMap, renderFn) {
+  container.querySelectorAll('.exercise-card').forEach(card => {
+    card.addEventListener('click', () => {
+      checkedMap[`${prefix}-${card.dataset.idx}`] = !checkedMap[`${prefix}-${card.dataset.idx}`];
+      renderFn();
+    });
+  });
+}
+
+/* ═══ SECTION RENDERERS ═══ */
+
+function renderWorkout() {
   const current = DAYS[activeDay];
 
-  // Top label color
-  document.getElementById('topLabel').style.color = current.color;
-
-  // Schedule bar
   const bar = document.getElementById('scheduleBar');
   bar.innerHTML = SCHEDULE.map((s, i) => {
     const isRest = s.idx === -1;
@@ -504,90 +641,126 @@ function render() {
       <span class="dot" style="background:${c}"></span>
     </button>`;
   }).join('');
-
   bar.querySelectorAll('.schedule-btn:not(.rest)').forEach(btn => {
-    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); render(); });
+    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); renderAll(); });
   });
 
-  // Day tabs
   const tabs = document.getElementById('dayTabs');
   tabs.innerHTML = DAYS.map((d, i) => {
-    const active = i === activeDay;
-    return `<button class="day-tab" data-idx="${i}" style="
-      border-color:${active ? d.color + '55' : '#222'};
-      background:${active ? d.color + '10' : 'var(--card)'};">
-      <div class="day-tab-name" style="color:${active ? d.color : 'var(--text-muted)'}">${d.name}</div>
-      <div class="day-tab-tag" style="color:${active ? '#999' : 'var(--text-ghost)'}">${d.tag}</div>
+    const a = i === activeDay;
+    return `<button class="day-tab" data-idx="${i}" style="border-color:${a ? d.color + '55' : '#222'};background:${a ? d.color + '10' : 'var(--card)'};">
+      <div class="day-tab-name" style="color:${a ? d.color : 'var(--text-muted)'}">${d.name}</div>
+      <div class="day-tab-tag" style="color:${a ? '#999' : 'var(--text-ghost)'}">${d.tag}</div>
     </button>`;
   }).join('');
-
   tabs.querySelectorAll('.day-tab').forEach(btn => {
-    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); render(); });
+    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); renderAll(); });
   });
 
-  // Progress
-  const completedCount = current.exercises.filter((_, i) => checked[`${activeDay}-${i}`]).length;
-  const pct = (completedCount / current.exercises.length) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
+  const cc = current.exercises.filter((_, i) => checked[`w${activeDay}-${i}`]).length;
+  document.getElementById('progressFill').style.width = (cc / current.exercises.length * 100) + '%';
   document.getElementById('progressFill').style.background = current.color;
-  document.getElementById('progressCount').textContent = `${completedCount}/${current.exercises.length}`;
+  document.getElementById('progressCount').textContent = `${cc}/${current.exercises.length}`;
 
-  // Exercises
   const list = document.getElementById('exerciseList');
-  list.innerHTML = current.exercises.map((ex, i) => {
-    const isChecked = !!checked[`${activeDay}-${i}`];
-    const c = current.color;
-    return `<div class="exercise-card ${isChecked ? 'checked' : ''} animate-in" data-idx="${i}"
-      style="background:${isChecked ? c + '08' : 'var(--card)'};
-             border-color:${isChecked ? c + '30' : 'var(--card-border)'};
-             animation-delay:${i * 0.04}s">
-      <div class="checkbox" style="
-        border-color:${isChecked ? c : '#333'};
-        background:${isChecked ? c : 'transparent'};">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="exercise-content">
-        <div class="exercise-name">${ex.name}</div>
-        <div class="exercise-meta">
-          <span class="meta-item"><span class="meta-label">Sets</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${ex.sets}</span></span>
-          <span class="meta-item"><span class="meta-label">Reps</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${ex.reps}</span></span>
-          <span class="meta-item"><span class="meta-label">Rest</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${ex.rest}</span></span>
-        </div>
-        <div class="exercise-notes">${ex.notes}</div>
-      </div>
-    </div>`;
-  }).join('');
+  list.innerHTML = current.exercises.map((ex, i) => renderCard(ex, i, current.color, `w${activeDay}`, checked)).join('');
+  bindCards(list, `w${activeDay}`, checked, renderWorkout);
 
-  list.querySelectorAll('.exercise-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const key = `${activeDay}-${card.dataset.idx}`;
-      checked[key] = !checked[key];
-      render();
-    });
-  });
-
-  // Gear
-  const gearList = document.getElementById('gearList');
-  gearList.innerHTML = GEAR.map(g => `
+  document.getElementById('gearList').innerHTML = GEAR.map(g => `
     <div class="gear-card">
-      <div class="gear-header">
-        <span class="gear-name">${g.name}</span>
-        <span class="gear-price">${g.price}</span>
-      </div>
+      <div class="gear-header"><span class="gear-name">${g.name}</span><span class="gear-price">${g.price}</span></div>
       <div class="gear-why">${g.why}</div>
     </div>`).join('');
 }
 
-// Gear toggle
+function renderMobility() {
+  const mob = MOBILITY[activeDay];
+
+  const tabs = document.getElementById('mobilityDayTabs');
+  tabs.innerHTML = MOBILITY.map((d, i) => {
+    const a = i === activeDay;
+    return `<button class="day-tab" data-idx="${i}" style="border-color:${a ? d.color + '55' : '#222'};background:${a ? d.color + '10' : 'var(--card)'};">
+      <div class="day-tab-name" style="color:${a ? d.color : 'var(--text-muted)'}">${d.name}</div>
+      <div class="day-tab-tag" style="color:${a ? '#999' : 'var(--text-ghost)'}">Mobility</div>
+    </button>`;
+  }).join('');
+  tabs.querySelectorAll('.day-tab').forEach(btn => {
+    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); renderAll(); });
+  });
+
+  document.getElementById('mobilityHeader').innerHTML = `
+    <div class="section-title" style="color:#F59E0B">Pre-Workout: ${mob.name} Day</div>
+    <div class="section-desc">${mob.desc}</div>
+    <div class="section-time" style="color:#F59E0B">${mob.time}</div>`;
+
+  const cc = mob.exercises.filter((_, i) => mobilityChecked[`m${activeDay}-${i}`]).length;
+  document.getElementById('mobilityProgressFill').style.width = (cc / mob.exercises.length * 100) + '%';
+  document.getElementById('mobilityProgressFill').style.background = '#F59E0B';
+  document.getElementById('mobilityProgressCount').textContent = `${cc}/${mob.exercises.length}`;
+
+  const list = document.getElementById('mobilityList');
+  list.innerHTML = mob.exercises.map((ex, i) => renderCard(ex, i, mob.color, `m${activeDay}`, mobilityChecked)).join('');
+  bindCards(list, `m${activeDay}`, mobilityChecked, renderMobility);
+}
+
+function renderPosture() {
+  const c = '#A855F7';
+  const cc = POSTURE.filter((_, i) => postureChecked[`p-${i}`]).length;
+  document.getElementById('postureProgressFill').style.width = (cc / POSTURE.length * 100) + '%';
+  document.getElementById('postureProgressFill').style.background = c;
+  document.getElementById('postureProgressCount').textContent = `${cc}/${POSTURE.length}`;
+
+  const list = document.getElementById('postureList');
+  list.innerHTML = POSTURE.map((ex, i) => renderCard(ex, i, c, 'p', postureChecked)).join('');
+  bindCards(list, 'p', postureChecked, renderPosture);
+}
+
+/* ═══ SECTION SWITCHING ═══ */
+
+function switchSection(section) {
+  activeSection = section;
+  document.querySelectorAll('.section-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.section === section);
+  });
+  document.getElementById('workoutSection').classList.toggle('hidden', section !== 'workout');
+  document.getElementById('mobilitySection').classList.toggle('hidden', section !== 'mobility');
+  document.getElementById('postureSection').classList.toggle('hidden', section !== 'posture');
+
+  const label = document.getElementById('topLabel');
+  if (section === 'workout') {
+    label.style.color = DAYS[activeDay].color;
+    label.textContent = 'Hypertrophy Program';
+  } else if (section === 'mobility') {
+    label.style.color = '#F59E0B';
+    label.textContent = 'Pre-Workout Mobility';
+  } else {
+    label.style.color = '#A855F7';
+    label.textContent = 'Posture Correction';
+  }
+}
+
+function renderAll() {
+  if (activeSection === 'workout') {
+    document.getElementById('topLabel').style.color = DAYS[activeDay].color;
+  }
+  renderWorkout();
+  renderMobility();
+  renderPosture();
+}
+
+/* ═══ INIT ═══ */
+
+document.querySelectorAll('.section-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchSection(btn.dataset.section));
+});
+
 document.getElementById('gearToggle').addEventListener('click', () => {
   gearOpen = !gearOpen;
   document.getElementById('gearList').classList.toggle('open', gearOpen);
   document.getElementById('gearArrow').classList.toggle('open', gearOpen);
 });
 
-render();
+renderAll();
 </script>
 </body>
 </html>

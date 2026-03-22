@@ -5,6 +5,8 @@ A minimal, interactive workout tracker built as a single HTML file. Designed for
 ## Features
 
 - **6-day Push/Pull/Legs split** optimized for muscle growth
+- **Pre-workout mobility** — changes automatically per training day (push/pull/legs)
+- **Daily posture routine** — targets forward head, rounded shoulders, upper back rounding, and anterior pelvic tilt
 - Tap exercises to check them off as you train
 - Progress bar per session
 - Budget gear recommendations
