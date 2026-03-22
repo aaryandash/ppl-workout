@@ -4,355 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Push / Pull / Legs — Home Gym Hypertrophy</title>
-<meta name="description" content="A complete 6-day Push/Pull/Legs hypertrophy program with mobility and posture routines. Dumbbells, bench, pull-up bar.">
+<meta name="description" content="A complete 6-day Push/Pull/Legs hypertrophy program with mobility and posture routines.">
 <meta name="theme-color" content="#0C0C0E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--push:#E8453C;--pull:#3B82F6;--legs:#10B981;--posture:#A855F7;--mobility:#F59E0B;--bg:#0C0C0E;--card:#131316;--card-border:#1A1A1F;--surface:#16161A;--text:#E8E8ED;--text-dim:#8888A0;--text-muted:#666;--text-faint:#555;--text-ghost:#444;--text-dead:#333}
+body{font-family:'DM Sans','Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:28px 20px 60px;-webkit-font-smoothing:antialiased}
+.container{max-width:680px;margin:0 auto}
+.label{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.9;transition:color .3s}
+h1{font-family:'Space Mono',monospace;font-size:32px;font-weight:700;letter-spacing:-1px;line-height:1.1;margin:6px 0}
+.subtitle{color:var(--text-dim);font-size:14px;line-height:1.5;margin-bottom:24px}
+.section-nav{display:flex;gap:4px;background:var(--surface);border-radius:12px;padding:4px;margin-bottom:28px}
+.section-btn{flex:1;border:none;border-radius:9px;padding:11px 8px;cursor:pointer;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);transition:all .25s;text-align:center;line-height:1.3}
+.section-btn.active{background:#1E1E24;color:var(--text)}
+.section-btn .section-icon{display:block;font-size:16px;margin-bottom:2px}
+.schedule-bar{display:flex;gap:4px;background:var(--surface);border-radius:12px;padding:4px;margin-bottom:28px}
+.schedule-btn{flex:1;border:none;border-radius:9px;padding:10px 0;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:background .2s;font-family:'DM Sans',sans-serif}
+.schedule-btn.rest{cursor:default}
+.schedule-btn .day-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.schedule-btn .day-workout{font-size:11px;font-weight:500}
+.schedule-btn .dot{width:4px;height:4px;border-radius:50%;margin-top:1px;display:none}
+.schedule-btn.active .dot{display:block}
+.day-tabs{display:flex;gap:8px;margin-bottom:24px}
+.day-tab{flex:1;padding:14px 12px;border:1.5px solid #222;border-radius:12px;background:var(--card);cursor:pointer;transition:all .25s;text-align:left;font-family:'DM Sans',sans-serif;color:inherit}
+.day-tab-name{font-size:16px;font-weight:700;font-family:'Space Mono',monospace;margin-bottom:3px;color:var(--text-muted)}
+.day-tab-tag{font-size:11px;color:var(--text-ghost)}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding:0 2px}
+.progress-track{flex:1;height:3px;background:#1E1E24;border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width .4s ease,background .3s;width:0}
+.progress-count{font-size:12px;color:var(--text-muted);font-family:'Space Mono',monospace;min-width:40px;text-align:right}
+.exercise-list{display:flex;flex-direction:column;gap:6px}
+.exercise-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:12px;user-select:none;-webkit-tap-highlight-color:transparent;position:relative}
+.exercise-card:hover{border-color:#2a2a30}
+.exercise-card.checked{opacity:.6}
+.checkbox{width:20px;height:20px;border-radius:6px;border:2px solid #333;background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.checkbox svg{display:none}
+.exercise-card.checked .checkbox svg{display:block}
+.exercise-content{flex:1;min-width:0}
+.exercise-name{font-size:14px;font-weight:600;margin-bottom:5px;color:#E0E0E8;transition:all .2s;padding-right:32px}
+.exercise-card.checked .exercise-name{text-decoration:line-through;color:var(--text-muted)}
+.exercise-meta{display:flex;gap:16px;flex-wrap:wrap}
+.meta-item{font-size:12px;color:var(--text-muted)}
+.meta-label{color:var(--text-faint);margin-right:4px}
+.meta-value{font-weight:600;font-family:'Space Mono',monospace}
+.exercise-notes{font-size:12px;color:var(--text-faint);margin-top:5px;font-style:italic;line-height:1.4}
+.target-badge{display:inline-block;font-size:10px;font-weight:700;font-family:'Space Mono',monospace;letter-spacing:.5px;padding:2px 7px;border-radius:5px;margin-left:8px;vertical-align:middle}
+.info-btn{position:absolute;top:12px;right:12px;width:26px;height:26px;border-radius:7px;border:1.5px solid #2a2a30;background:var(--surface);color:var(--text-muted);font-size:13px;font-weight:700;font-family:'Space Mono',monospace;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;line-height:1}
+.info-btn:hover{border-color:#555;color:var(--text);background:#1E1E24}
+.section-header{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--card-border)}
+.section-title{font-family:'Space Mono',monospace;font-size:18px;font-weight:700;margin-bottom:4px}
+.section-desc{font-size:13px;color:var(--text-dim);line-height:1.5}
+.section-time{font-size:11px;font-family:'Space Mono',monospace;margin-top:6px;opacity:.8}
+.focus-areas{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.focus-pill{font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;background:var(--card);border:1px solid var(--card-border);color:var(--text-dim)}
+.gear-toggle{margin-top:28px;width:100%;padding:14px 16px;background:var(--surface);border:1px solid #222;border-radius:12px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600}
+.gear-arrow{font-size:18px;color:var(--text-muted);transition:transform .25s}
+.gear-arrow.open{transform:rotate(180deg)}
+.gear-list{display:none;flex-direction:column;gap:6px;margin-top:6px}
+.gear-list.open{display:flex}
+.gear-card{background:var(--card);border:1px solid var(--card-border);border-radius:12px;padding:14px 16px}
+.gear-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
+.gear-name{font-size:14px;font-weight:600;color:#E0E0E8}
+.gear-price{font-size:12px;font-weight:700;font-family:'Space Mono',monospace;color:var(--legs);background:rgba(16,185,129,.08);padding:3px 8px;border-radius:6px}
+.gear-why{font-size:12px;color:#777;line-height:1.5}
+.principles{margin-top:28px;padding:16px;background:var(--card);border:1px solid var(--card-border);border-radius:12px;font-size:12px;color:var(--text-muted);line-height:1.7}
+.principles strong{font-weight:700;color:#888}
+.footer{margin-top:32px;text-align:center;font-size:11px;color:var(--text-dead);letter-spacing:.5px}
+.footer a{color:var(--text-ghost);text-decoration:none}
+.footer a:hover{color:var(--text-muted)}
+.hidden{display:none!important}
 
-  :root {
-    --push: #E8453C;
-    --pull: #3B82F6;
-    --legs: #10B981;
-    --posture: #A855F7;
-    --mobility: #F59E0B;
-    --bg: #0C0C0E;
-    --card: #131316;
-    --card-border: #1A1A1F;
-    --surface: #16161A;
-    --text: #E8E8ED;
-    --text-dim: #8888A0;
-    --text-muted: #666;
-    --text-faint: #555;
-    --text-ghost: #444;
-    --text-dead: #333;
-  }
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1000;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:#111114;border-radius:20px 20px 0 0;width:100%;max-width:680px;max-height:88vh;overflow-y:auto;padding:0;animation:slideUp .3s ease;border:1px solid #222;border-bottom:none}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-handle{width:36px;height:4px;border-radius:2px;background:#333;margin:12px auto 0}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:8px;border:1px solid #2a2a30;background:var(--surface);color:var(--text-muted);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.modal-close:hover{border-color:#555;color:var(--text)}
+.modal-header{padding:20px 24px 0;position:relative}
+.modal-title{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;padding-right:40px;line-height:1.2}
+.modal-subtitle{font-size:12px;color:var(--text-dim);margin-top:4px}
+.modal-media{margin:16px 24px;border-radius:12px;overflow:hidden;background:#1a1a1f;border:1px dashed #333;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--text-ghost);font-size:13px;position:relative}
+.modal-media img,.modal-media video{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:12px}
+.modal-media .placeholder-icon{font-size:28px;opacity:.5}
+.modal-media .placeholder-text{font-size:11px;color:var(--text-dead);font-family:'Space Mono',monospace}
+.modal-body{padding:0 24px 28px}
+.modal-section{margin-top:20px}
+.modal-section-title{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;opacity:.7}
+.cue-list{display:flex;flex-direction:column;gap:8px}
+.cue-item{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:#ccc}
+.cue-icon{flex-shrink:0;width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px}
+.cue-icon.good{background:rgba(16,185,129,.15);color:#10B981}
+.cue-icon.bad{background:rgba(232,69,60,.15);color:#E8453C}
+.muscle-tags{display:flex;flex-wrap:wrap;gap:6px}
+.muscle-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:7px;background:#1a1a1f;border:1px solid #252530;color:var(--text-dim)}
+.muscle-tag.primary{border-color:#3a3a50;color:var(--text)}
 
-  body {
-    font-family: 'DM Sans', 'Helvetica Neue', Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 28px 20px 60px;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .container { max-width: 680px; margin: 0 auto; }
-
-  .label {
-    font-family: 'Space Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.9;
-    transition: color 0.3s;
-  }
-
-  h1 {
-    font-family: 'Space Mono', monospace;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.1;
-    margin: 6px 0;
-  }
-
-  .subtitle {
-    color: var(--text-dim);
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 24px;
-  }
-
-  /* ── Main Section Nav ── */
-  .section-nav {
-    display: flex;
-    gap: 4px;
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 4px;
-    margin-bottom: 28px;
-  }
-
-  .section-btn {
-    flex: 1;
-    border: none;
-    border-radius: 9px;
-    padding: 11px 8px;
-    cursor: pointer;
-    background: transparent;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    transition: all 0.25s;
-    text-align: center;
-    line-height: 1.3;
-  }
-
-  .section-btn.active {
-    background: #1E1E24;
-    color: var(--text);
-  }
-
-  .section-btn .section-icon {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 2px;
-  }
-
-  /* ── Weekly Schedule Bar ── */
-  .schedule-bar {
-    display: flex;
-    gap: 4px;
-    background: var(--surface);
-    border-radius: 12px;
-    padding: 4px;
-    margin-bottom: 28px;
-  }
-
-  .schedule-btn {
-    flex: 1;
-    border: none;
-    border-radius: 9px;
-    padding: 10px 0;
-    background: transparent;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3px;
-    transition: background 0.2s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .schedule-btn.rest { cursor: default; }
-
-  .schedule-btn .day-label {
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 1px; text-transform: uppercase;
-  }
-
-  .schedule-btn .day-workout {
-    font-size: 11px; font-weight: 500;
-  }
-
-  .schedule-btn .dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    margin-top: 1px; display: none;
-  }
-
-  .schedule-btn.active .dot { display: block; }
-
-  /* ── Day Tabs ── */
-  .day-tabs { display: flex; gap: 8px; margin-bottom: 24px; }
-
-  .day-tab {
-    flex: 1; padding: 14px 12px;
-    border: 1.5px solid #222; border-radius: 12px;
-    background: var(--card); cursor: pointer;
-    transition: all 0.25s; text-align: left;
-    font-family: 'DM Sans', sans-serif; color: inherit;
-  }
-
-  .day-tab-name {
-    font-size: 16px; font-weight: 700;
-    font-family: 'Space Mono', monospace;
-    margin-bottom: 3px; color: var(--text-muted);
-  }
-
-  .day-tab-tag { font-size: 11px; color: var(--text-ghost); }
-
-  /* ── Progress Bar ── */
-  .progress-row {
-    display: flex; align-items: center;
-    gap: 12px; margin-bottom: 20px; padding: 0 2px;
-  }
-
-  .progress-track {
-    flex: 1; height: 3px; background: #1E1E24;
-    border-radius: 4px; overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%; border-radius: 4px;
-    transition: width 0.4s ease, background 0.3s; width: 0%;
-  }
-
-  .progress-count {
-    font-size: 12px; color: var(--text-muted);
-    font-family: 'Space Mono', monospace;
-    min-width: 40px; text-align: right;
-  }
-
-  /* ── Cards ── */
-  .exercise-list { display: flex; flex-direction: column; gap: 6px; }
-
-  .exercise-card {
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 12px; padding: 14px 16px; cursor: pointer;
-    transition: all 0.2s; display: flex; align-items: flex-start;
-    gap: 12px; user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .exercise-card:hover { border-color: #2a2a30; }
-  .exercise-card.checked { opacity: 0.6; }
-
-  .checkbox {
-    width: 20px; height: 20px; border-radius: 6px;
-    border: 2px solid #333; background: transparent;
-    flex-shrink: 0; display: flex; align-items: center;
-    justify-content: center; transition: all 0.2s; margin-top: 1px;
-  }
-
-  .checkbox svg { display: none; }
-  .exercise-card.checked .checkbox svg { display: block; }
-
-  .exercise-content { flex: 1; min-width: 0; }
-
-  .exercise-name {
-    font-size: 14px; font-weight: 600; margin-bottom: 5px;
-    color: #E0E0E8; transition: all 0.2s;
-  }
-
-  .exercise-card.checked .exercise-name {
-    text-decoration: line-through; color: var(--text-muted);
-  }
-
-  .exercise-meta { display: flex; gap: 16px; flex-wrap: wrap; }
-  .meta-item { font-size: 12px; color: var(--text-muted); }
-  .meta-label { color: var(--text-faint); margin-right: 4px; }
-
-  .meta-value {
-    font-weight: 600; font-family: 'Space Mono', monospace;
-  }
-
-  .exercise-notes {
-    font-size: 12px; color: var(--text-faint);
-    margin-top: 5px; font-style: italic; line-height: 1.4;
-  }
-
-  .target-badge {
-    display: inline-block; font-size: 10px; font-weight: 700;
-    font-family: 'Space Mono', monospace; letter-spacing: 0.5px;
-    padding: 2px 7px; border-radius: 5px; margin-left: 8px;
-    vertical-align: middle;
-  }
-
-  /* ── Section Header ── */
-  .section-header {
-    margin-bottom: 16px; padding-bottom: 12px;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  .section-title {
-    font-family: 'Space Mono', monospace;
-    font-size: 18px; font-weight: 700; margin-bottom: 4px;
-  }
-
-  .section-desc {
-    font-size: 13px; color: var(--text-dim); line-height: 1.5;
-  }
-
-  .section-time {
-    font-size: 11px; font-family: 'Space Mono', monospace;
-    margin-top: 6px; opacity: 0.8;
-  }
-
-  .focus-areas {
-    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
-  }
-
-  .focus-pill {
-    font-size: 11px; font-weight: 600; padding: 5px 10px;
-    border-radius: 8px; background: var(--card);
-    border: 1px solid var(--card-border); color: var(--text-dim);
-  }
-
-  /* ── Gear ── */
-  .gear-toggle {
-    margin-top: 28px; width: 100%; padding: 14px 16px;
-    background: var(--surface); border: 1px solid #222;
-    border-radius: 12px; cursor: pointer; display: flex;
-    justify-content: space-between; align-items: center;
-    color: var(--text); font-family: 'DM Sans', sans-serif;
-    font-size: 14px; font-weight: 600;
-  }
-
-  .gear-arrow {
-    font-size: 18px; color: var(--text-muted);
-    transition: transform 0.25s;
-  }
-
-  .gear-arrow.open { transform: rotate(180deg); }
-
-  .gear-list {
-    display: none; flex-direction: column;
-    gap: 6px; margin-top: 6px;
-  }
-
-  .gear-list.open { display: flex; }
-
-  .gear-card {
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 12px; padding: 14px 16px;
-  }
-
-  .gear-header {
-    display: flex; justify-content: space-between;
-    align-items: center; margin-bottom: 5px;
-  }
-
-  .gear-name { font-size: 14px; font-weight: 600; color: #E0E0E8; }
-
-  .gear-price {
-    font-size: 12px; font-weight: 700;
-    font-family: 'Space Mono', monospace;
-    color: var(--legs); background: rgba(16, 185, 129, 0.08);
-    padding: 3px 8px; border-radius: 6px;
-  }
-
-  .gear-why { font-size: 12px; color: #777; line-height: 1.5; }
-
-  /* ── Footer ── */
-  .principles {
-    margin-top: 28px; padding: 16px;
-    background: var(--card); border: 1px solid var(--card-border);
-    border-radius: 12px; font-size: 12px;
-    color: var(--text-muted); line-height: 1.7;
-  }
-
-  .principles strong { font-weight: 700; color: #888; }
-
-  .footer {
-    margin-top: 32px; text-align: center;
-    font-size: 11px; color: var(--text-dead); letter-spacing: 0.5px;
-  }
-
-  .footer a { color: var(--text-ghost); text-decoration: none; }
-  .footer a:hover { color: var(--text-muted); }
-
-  .hidden { display: none !important; }
-
-  @media (max-width: 480px) {
-    h1 { font-size: 26px; }
-    .day-tab { padding: 10px 8px; }
-    .day-tab-name { font-size: 14px; }
-    .exercise-meta { gap: 10px; }
-    .schedule-btn .day-label { font-size: 9px; }
-    .schedule-btn .day-workout { font-size: 10px; }
-    .section-btn { font-size: 11px; padding: 10px 4px; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .animate-in { animation: fadeUp 0.4s ease forwards; opacity: 0; }
+@media(min-width:640px){.modal-overlay{align-items:center;padding:20px}.modal{border-radius:20px;border-bottom:1px solid #222;max-height:80vh}}
+@media(max-width:480px){h1{font-size:26px}.day-tab{padding:10px 8px}.day-tab-name{font-size:14px}.exercise-meta{gap:10px}.schedule-btn .day-label{font-size:9px}.schedule-btn .day-workout{font-size:10px}.section-btn{font-size:11px;padding:10px 4px}.modal-title{font-size:17px}.modal-media{margin:12px 16px}.modal-header{padding:16px 16px 0}.modal-body{padding:0 16px 24px}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.animate-in{animation:fadeUp .4s ease forwards;opacity:0}
 </style>
 </head>
 <body>
@@ -360,406 +115,245 @@
   <div class="label" id="topLabel">Hypertrophy Program</div>
   <h1>Push / Pull / Legs</h1>
   <p class="subtitle">6 days on, 1 rest. Dumbbells + bench + pull-up bar.</p>
-
-  <div class="section-nav" id="sectionNav">
-    <button class="section-btn active" data-section="workout">
-      <span class="section-icon">🏋</span>Workout
-    </button>
-    <button class="section-btn" data-section="mobility">
-      <span class="section-icon">⚡</span>Pre-Workout
-    </button>
-    <button class="section-btn" data-section="posture">
-      <span class="section-icon">🧍</span>Daily Posture
-    </button>
+  <div class="section-nav">
+    <button class="section-btn active" data-section="workout"><span class="section-icon">&#127947;</span>Workout</button>
+    <button class="section-btn" data-section="mobility"><span class="section-icon">&#9889;</span>Pre-Workout</button>
+    <button class="section-btn" data-section="posture"><span class="section-icon">&#129485;</span>Daily Posture</button>
   </div>
-
-  <!-- ═══ WORKOUT ═══ -->
   <div id="workoutSection">
     <div class="schedule-bar" id="scheduleBar"></div>
     <div class="day-tabs" id="dayTabs"></div>
-    <div class="progress-row">
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <span class="progress-count" id="progressCount">0/7</span>
-    </div>
+    <div class="progress-row"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span class="progress-count" id="progressCount">0/7</span></div>
     <div class="exercise-list" id="exerciseList"></div>
-    <button class="gear-toggle" id="gearToggle">
-      <span>Worth Buying</span>
-      <span class="gear-arrow" id="gearArrow">▾</span>
-    </button>
+    <button class="gear-toggle" id="gearToggle"><span>Worth Buying</span><span class="gear-arrow" id="gearArrow">&#9662;</span></button>
     <div class="gear-list" id="gearList"></div>
-    <div class="principles">
-      <strong>Key principles: </strong>
-      Progressive overload every 1–2 weeks (add reps, then weight). Train 1–2 reps from failure on compounds, to failure on isolation. Eat 1g protein per lb bodyweight. Sleep 7–9 hours. Deload every 4–6 weeks.
-    </div>
+    <div class="principles"><strong>Key principles: </strong>Progressive overload every 1-2 weeks (add reps, then weight). Train 1-2 reps from failure on compounds, to failure on isolation. Eat 1g protein per lb bodyweight. Sleep 7-9 hours. Deload every 4-6 weeks.</div>
   </div>
-
-  <!-- ═══ PRE-WORKOUT MOBILITY ═══ -->
   <div id="mobilitySection" class="hidden">
     <div class="day-tabs" id="mobilityDayTabs"></div>
     <div class="section-header" id="mobilityHeader"></div>
-    <div class="progress-row">
-      <div class="progress-track"><div class="progress-fill" id="mobilityProgressFill"></div></div>
-      <span class="progress-count" id="mobilityProgressCount">0/4</span>
-    </div>
+    <div class="progress-row"><div class="progress-track"><div class="progress-fill" id="mobilityProgressFill"></div></div><span class="progress-count" id="mobilityProgressCount">0/4</span></div>
     <div class="exercise-list" id="mobilityList"></div>
-    <div class="principles" style="margin-top:20px">
-      <strong>When to do this: </strong>
-      Right before lifting. Move through each exercise with control — not a rush. Avoid static holds longer than 30 sec before heavy compounds. Save deeper stretches for after your session or the posture routine.
-    </div>
+    <div class="principles" style="margin-top:20px"><strong>When to do this: </strong>Right before lifting. Move through each exercise with control. Avoid static holds longer than 30 sec before heavy compounds. Save deeper stretches for post-workout or the posture routine.</div>
   </div>
-
-  <!-- ═══ DAILY POSTURE ═══ -->
   <div id="postureSection" class="hidden">
-    <div class="section-header">
-      <div class="section-title" style="color: var(--posture)">Daily Posture Reset</div>
-      <div class="section-desc">Fixes the 4 biggest posture problems from desk life. Do this daily — morning, rest days, or post-workout. Consistency beats intensity.</div>
-      <div class="section-time" style="color: var(--posture)">~12 min</div>
-    </div>
-    <div class="focus-areas">
-      <span class="focus-pill" style="border-color:#A855F740">🔹 Forward Head</span>
-      <span class="focus-pill" style="border-color:#A855F740">🔹 Rounded Shoulders</span>
-      <span class="focus-pill" style="border-color:#A855F740">🔹 Upper Back Rounding</span>
-      <span class="focus-pill" style="border-color:#A855F740">🔹 Anterior Pelvic Tilt</span>
-    </div>
-    <div class="progress-row">
-      <div class="progress-track"><div class="progress-fill" id="postureProgressFill"></div></div>
-      <span class="progress-count" id="postureProgressCount">0/7</span>
-    </div>
+    <div class="section-header"><div class="section-title" style="color:var(--posture)">Daily Posture Reset</div><div class="section-desc">Fixes the 4 biggest posture problems from desk life. Do this daily -- morning, rest days, or post-workout.</div><div class="section-time" style="color:var(--posture)">~12 min</div></div>
+    <div class="focus-areas"><span class="focus-pill" style="border-color:#A855F740">&#128313; Forward Head</span><span class="focus-pill" style="border-color:#A855F740">&#128313; Rounded Shoulders</span><span class="focus-pill" style="border-color:#A855F740">&#128313; Upper Back Rounding</span><span class="focus-pill" style="border-color:#A855F740">&#128313; Anterior Pelvic Tilt</span></div>
+    <div class="progress-row"><div class="progress-track"><div class="progress-fill" id="postureProgressFill"></div></div><span class="progress-count" id="postureProgressCount">0/7</span></div>
     <div class="exercise-list" id="postureList"></div>
-    <div class="principles" style="margin-top:20px">
-      <strong>Why these exercises: </strong>
-      Chin tucks and neck flexor holds pull your head back over your spine — this sharpens your jawline and eliminates "tech neck." Thoracic extensions and wall angels reverse upper-back rounding so you stand taller. Hip flexor stretches and glute activation fix anterior pelvic tilt, which flattens your stomach and adds visible height. Results compound over weeks — stay consistent.
-    </div>
+    <div class="principles" style="margin-top:20px"><strong>Why these exercises: </strong>Chin tucks and neck flexor holds pull your head back over your spine -- sharpens jawline and eliminates "tech neck." Thoracic extensions and wall angels reverse upper-back rounding so you stand taller. Hip flexor stretches and glute activation fix anterior pelvic tilt, flattening your stomach and adding visible height.</div>
   </div>
+  <div class="footer">Built for gains -- open source on <a href="https://github.com" target="_blank">GitHub</a></div>
+</div>
 
-  <div class="footer">
-    Built for gains — open source on <a href="https://github.com" target="_blank">GitHub</a>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-header">
+      <button class="modal-close" id="modalClose">&#10005;</button>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-subtitle" id="modalSubtitle"></div>
+    </div>
+    <div class="modal-media" id="modalMedia">
+      <span class="placeholder-icon">&#127916;</span>
+      <span>Add your own GIF or image</span>
+      <span class="placeholder-text">Set mediaUrl in exercise data</span>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
   </div>
 </div>
 
 <script>
-/* ═══ DATA ═══ */
+var DAYS=[{name:"Push",tag:"Chest \xb7 Shoulders \xb7 Triceps",color:"#E8453C",exercises:[
+{name:"Dumbbell Bench Press",sets:"4",reps:"8\u201310",rest:"2 min",notes:"Control the eccentric (3 sec down). Go heavy.",detail:{mediaUrl:"",formCues:["Plant feet flat on floor, slight arch in lower back","Retract shoulder blades and press them into the bench","Lower dumbbells to nipple line with elbows at ~45\xb0","3 second controlled descent, explosive press up","Touch dumbbells lightly at the top"],mistakes:["Flaring elbows to 90\xb0 \u2014 destroys shoulders over time","Bouncing off the chest \u2014 lose the stretch and risk injury","Lifting hips off the bench \u2014 keep glutes planted","Not retracting shoulder blades \u2014 leaks power"],muscles:{primary:["Chest (pec major)"],secondary:["Front delts","Triceps"]}}},
+{name:"Incline Dumbbell Press",sets:"3",reps:"10\u201312",rest:"90 sec",notes:"30\u201345\xb0 angle. Squeeze at the top.",detail:{mediaUrl:"",formCues:["Set bench to 30\u201345\xb0 \u2014 steeper hits more front delt","Same scapular retraction as flat bench","Press in a slight arc, bringing dumbbells together at top","Feel the stretch in upper chest at the bottom"],mistakes:["Bench too steep (60\xb0+) \u2014 turns into a shoulder press","Letting wrists roll back \u2014 keep stacked over elbows","Cutting range of motion short at the bottom"],muscles:{primary:["Upper chest"],secondary:["Front delts","Triceps"]}}},
+{name:"Dumbbell Overhead Press",sets:"4",reps:"8\u201310",rest:"2 min",notes:"Seated or standing. Full lockout.",detail:{mediaUrl:"",formCues:["Start with dumbbells at ear height, palms forward","Press straight up \u2014 dumbbells end over your ears, not face","Full lockout at top, squeeze delts briefly","Brace core hard if standing \u2014 no excessive lean back"],mistakes:["Arching the lower back excessively \u2014 brace your core","Starting too low (below ears) \u2014 unnecessary shoulder stress","Half-repping \u2014 go to full lockout"],muscles:{primary:["Side delts","Front delts"],secondary:["Triceps","Upper traps"]}}},
+{name:"Dumbbell Lateral Raises",sets:"4",reps:"12\u201315",rest:"60 sec",notes:"Slight forward lean. Pinky-up at top.",detail:{mediaUrl:"",formCues:["Lean forward slightly from the hips","Lead with your elbows, not your hands","Raise to just above shoulder height","Slight pinky-up rotation at the top"],mistakes:["Using momentum / swinging the weight \u2014 go lighter","Shrugging traps up \u2014 keep shoulders down","Raising too high \u2014 becomes a trap exercise"],muscles:{primary:["Side delts"],secondary:["Upper traps","Rear delts"]}}},
+{name:"Dumbbell Flyes",sets:"3",reps:"12\u201315",rest:"60 sec",notes:"Deep stretch at bottom. Slight bend in elbows.",detail:{mediaUrl:"",formCues:["Maintain a slight, fixed bend in elbows throughout","Think about hugging a barrel \u2014 wide arc, not a press","Go deep at the bottom for maximum chest stretch","Squeeze chest hard at the top"],mistakes:["Straightening arms \u2014 turns it into a press","Going too heavy \u2014 this is a stretch/isolation move","Bending elbows more as you fatigue \u2014 lock the angle"],muscles:{primary:["Chest (pec major)"],secondary:["Front delts"]}}},
+{name:"Dumbbell Skull Crushers",sets:"3",reps:"10\u201312",rest:"60 sec",notes:"Lie on bench, lower dumbbells to temples. Keep elbows locked in place.",detail:{mediaUrl:"",formCues:["Lie flat on bench, arms extended straight up","Lower dumbbells by bending only at the elbow","Bring dumbbells to your temples or just past forehead","Keep upper arms perfectly vertical \u2014 elbows at ceiling","Extend back up and squeeze triceps at top"],mistakes:["Flaring elbows out wide \u2014 keeps tension off triceps","Moving upper arms back and forth \u2014 only forearm moves","Going too heavy and losing control near your face"],muscles:{primary:["Triceps (long head)","Triceps (medial head)"],secondary:["Triceps (lateral head)"]}}},
+{name:"Dumbbell Kickbacks",sets:"3",reps:"12\u201315",rest:"60 sec",notes:"Lock upper arm. Squeeze at extension.",detail:{mediaUrl:"",formCues:["Hinge forward, upper arm parallel to floor and pinned to side","Extend forearm back until arm is fully straight","Squeeze and hold for 1 second at full extension","Slow and controlled \u2014 not a momentum exercise"],mistakes:["Swinging the weight \u2014 defeats the purpose","Dropping the upper arm \u2014 keep it locked parallel","Using too much weight \u2014 go light and feel it"],muscles:{primary:["Triceps (lateral head)"],secondary:["Triceps (long head)"]}}}
+]},{name:"Pull",tag:"Back \xb7 Biceps \xb7 Rear Delts",color:"#3B82F6",exercises:[
+{name:"Pull-Ups (Weighted if possible)",sets:"4",reps:"6\u201310",rest:"2 min",notes:"Full dead hang to chin over bar. Add weight via backpack.",detail:{mediaUrl:"",formCues:["Start from a full dead hang \u2014 arms completely straight","Initiate by pulling shoulder blades down and back","Pull until chin clears the bar","Control the descent \u2014 2\u20133 seconds down","Overhand grip, slightly wider than shoulder width"],mistakes:["Kipping or swinging \u2014 kills muscle activation","Half reps \u2014 full dead hang to chin over bar every time","Craning neck to get chin over \u2014 pull chest to bar instead"],muscles:{primary:["Lats","Upper back"],secondary:["Biceps","Rear delts","Forearms"]}}},
+{name:"Dumbbell Rows",sets:"4",reps:"8\u201310",rest:"90 sec",notes:"One arm at a time. Pull to hip, not chest.",detail:{mediaUrl:"",formCues:["One hand and knee on bench for support","Pull the dumbbell toward your hip, not your chest","Drive your elbow past your torso at the top","Squeeze your lat for 1 second at the top","Let the dumbbell stretch your lat fully at the bottom"],mistakes:["Rowing to the chest \u2014 shifts work to traps and rear delt","Rotating torso to heave the weight \u2014 keep hips square","Shrugging your shoulder up \u2014 keep it depressed"],muscles:{primary:["Lats"],secondary:["Rhomboids","Rear delts","Biceps"]}}},
+{name:"Chest-Supported Incline Row",sets:"3",reps:"10\u201312",rest:"90 sec",notes:"Lie face-down on incline bench. Great for upper back.",detail:{mediaUrl:"",formCues:["Set bench to 30\u201345\xb0, lie face down with chest on pad","Let arms hang straight down, then row up","Drive elbows back and up \u2014 pinch a pencil between shoulder blades","This removes cheating \u2014 you can't use momentum"],mistakes:["Lifting chest off the bench","Going too heavy \u2014 feel the upper back work","Shrugging traps instead of retracting scapulae"],muscles:{primary:["Upper back","Rhomboids"],secondary:["Rear delts","Biceps"]}}},
+{name:"Chin-Ups",sets:"3",reps:"AMRAP",rest:"2 min",notes:"Supinated grip. Excellent bicep + back builder.",detail:{mediaUrl:"",formCues:["Underhand (supinated) grip, shoulder width apart","Full dead hang start \u2014 same as pull-ups","Focus on pulling your chest to the bar","Squeeze biceps hard at the top"],mistakes:["Not going to full dead hang at the bottom","Swinging or kipping \u2014 strict form only","Grip too narrow \u2014 shoulder width is the sweet spot"],muscles:{primary:["Biceps","Lats"],secondary:["Lower traps","Forearms"]}}},
+{name:"Dumbbell Reverse Flyes",sets:"4",reps:"12\u201315",rest:"60 sec",notes:"Bent over or chest-supported. Rear delts are key.",detail:{mediaUrl:"",formCues:["Hinge forward or lie face-down on incline bench","Arms hanging, slight bend in elbows \u2014 lock that angle","Raise dumbbells out to sides, leading with elbows","Squeeze shoulder blades together, hold 1 sec"],mistakes:["Using too much weight \u2014 turning it into a row","Straightening then bending elbows through the rep","Not controlling the descent"],muscles:{primary:["Rear delts"],secondary:["Rhomboids","Upper traps"]}}},
+{name:"Dumbbell Bicep Curls",sets:"3",reps:"10\u201312",rest:"60 sec",notes:"Alternating. No swinging \u2014 strict form.",detail:{mediaUrl:"",formCues:["Stand tall, elbows pinned to your sides","Supinate (rotate palm up) as you curl","Squeeze bicep hard at the top","Lower slowly \u2014 2\u20133 seconds on the way down"],mistakes:["Swinging the body to get weight up \u2014 go lighter","Moving elbows forward \u2014 pin them at your sides","Cutting the bottom range short"],muscles:{primary:["Biceps (short head)","Biceps (long head)"],secondary:["Brachialis","Forearms"]}}},
+{name:"Incline Dumbbell Curls",sets:"3",reps:"10\u201312",rest:"60 sec",notes:"Sit on incline bench. Long head stretch.",detail:{mediaUrl:"",formCues:["Set bench to ~45\xb0 incline, sit back fully","Let arms hang straight down behind your torso","Curl up without moving your upper arm forward","Feel the deep stretch in the bicep at the bottom"],mistakes:["Bringing elbows forward \u2014 defeats the long head stretch","Sitting too upright \u2014 need the incline for the stretch","Rushing reps \u2014 slow controlled movement"],muscles:{primary:["Biceps (long head)"],secondary:["Brachialis"]}}}
+]},{name:"Legs",tag:"Quads \xb7 Hamstrings \xb7 Glutes \xb7 Calves",color:"#10B981",exercises:[
+{name:"Dumbbell Bulgarian Split Squats",sets:"4",reps:"8\u201310 /leg",rest:"90 sec",notes:"Rear foot on bench. THE king of dumbbell leg exercises.",detail:{mediaUrl:"",formCues:["Rear foot laces-down on bench, front foot 2\u20133 feet ahead","Drop straight down \u2014 front knee tracks over toes","Lean torso slightly forward for more glute activation","Drive through your front heel to stand back up","Aim for rear knee nearly touching the floor"],mistakes:["Front foot too close to bench \u2014 excess knee stress","Pushing off the back foot \u2014 all force through front leg","Front knee caving inward \u2014 push it out over pinky toe"],muscles:{primary:["Quads","Glutes"],secondary:["Hamstrings","Adductors","Core"]}}},
+{name:"Dumbbell Romanian Deadlifts",sets:"4",reps:"10\u201312",rest:"90 sec",notes:"Hinge at hips. Feel the hamstring stretch.",detail:{mediaUrl:"",formCues:["Stand tall, dumbbells in front of thighs","Push hips BACK (close a car door with your butt)","Keep dumbbells close to your legs the entire time","Stop when you feel a deep hamstring stretch (mid-shin)","Squeeze glutes hard to stand back up"],mistakes:["Rounding the lower back \u2014 keep neutral spine","Bending knees too much \u2014 this is a hinge, not a squat","Looking up \u2014 keep a neutral neck"],muscles:{primary:["Hamstrings","Glutes"],secondary:["Lower back","Adductors"]}}},
+{name:"Dumbbell Goblet Squats",sets:"3",reps:"12\u201315",rest:"90 sec",notes:"Hold one heavy dumbbell at chest. Deep squat.",detail:{mediaUrl:"",formCues:["Hold one dumbbell vertically at chest height","Feet shoulder-width or slightly wider, toes out ~15\xb0","Squat deep \u2014 hip crease below knee","Keep chest up tall \u2014 the front load helps","Drive through your whole foot to stand"],mistakes:["Heels coming up \u2014 work on ankle mobility","Knees caving in \u2014 push them out over toes","Leaning too far forward"],muscles:{primary:["Quads","Glutes"],secondary:["Core","Upper back (isometric)"]}}},
+{name:"Dumbbell Step-Ups",sets:"3",reps:"10\u201312 /leg",rest:"60 sec",notes:"Use bench height. Drive through front foot only.",detail:{mediaUrl:"",formCues:["Place entire front foot on bench","Drive up using ONLY the front leg","Stand fully upright at the top, squeeze glute","Lower slowly and controlled"],mistakes:["Pushing off with the trailing leg","Bench too low \u2014 knee should be at ~90\xb0","Rushing the movement"],muscles:{primary:["Quads","Glutes"],secondary:["Hamstrings","Calves"]}}},
+{name:"Dumbbell Hip Thrusts",sets:"3",reps:"12\u201315",rest:"60 sec",notes:"Back on bench. Squeeze glutes hard at top.",detail:{mediaUrl:"",formCues:["Upper back/shoulder blades on bench edge","Feet flat, knees at ~90\xb0 at the top","Drive hips up by squeezing glutes","Hold top for 1\u20132 seconds, hard glute squeeze","Place dumbbell on hip crease"],mistakes:["Hyperextending the lower back at the top","Feet too close or too far from bench","Pushing through toes instead of heels"],muscles:{primary:["Glutes"],secondary:["Hamstrings","Core"]}}},
+{name:"Single-Leg Calf Raises",sets:"4",reps:"15\u201320",rest:"45 sec",notes:"Hold dumbbell. Full ROM \u2014 stretch & squeeze.",detail:{mediaUrl:"",formCues:["Stand on edge of step or plate for full ROM","Let heel drop below the step for a deep stretch","Press up as high as possible, hold peak 1 second","Hold dumbbell in same-side hand"],mistakes:["Bouncing at the bottom","Cutting range of motion","Going too fast \u2014 calves respond to time under tension"],muscles:{primary:["Gastrocnemius"],secondary:["Soleus"]}}},
+{name:"Dumbbell Lunges (Walking)",sets:"3",reps:"12 /leg",rest:"60 sec",notes:"Long strides for glute emphasis, short for quads.",detail:{mediaUrl:"",formCues:["Take a long stride forward, lower until rear knee nearly touches floor","Keep torso upright","Drive through the front heel to step forward","Longer stride = more glute; shorter = more quad"],mistakes:["Steps too short \u2014 need depth","Front knee shooting past toes excessively","Wobbling side to side \u2014 engage core, wider stance"],muscles:{primary:["Quads","Glutes"],secondary:["Hamstrings","Core","Calves"]}}}
+]}];
 
-const DAYS = [
-  {
-    name: "Push", tag: "Chest · Shoulders · Triceps", color: "#E8453C",
-    exercises: [
-      { name: "Dumbbell Bench Press", sets: "4", reps: "8–10", rest: "2 min", notes: "Control the eccentric (3 sec down). Go heavy." },
-      { name: "Incline Dumbbell Press", sets: "3", reps: "10–12", rest: "90 sec", notes: "30–45° angle. Squeeze at the top." },
-      { name: "Dumbbell Overhead Press", sets: "4", reps: "8–10", rest: "2 min", notes: "Seated or standing. Full lockout." },
-      { name: "Dumbbell Lateral Raises", sets: "4", reps: "12–15", rest: "60 sec", notes: "Slight forward lean. Pinky-up at top." },
-      { name: "Dumbbell Flyes", sets: "3", reps: "12–15", rest: "60 sec", notes: "Deep stretch at bottom. Slight bend in elbows." },
-      { name: "Dumbbell Skull Crushers", sets: "3", reps: "10–12", rest: "60 sec", notes: "Lie on bench, lower dumbbells to temples. Keep elbows locked in place — don't flare." },
-      { name: "Dumbbell Kickbacks", sets: "3", reps: "12–15", rest: "60 sec", notes: "Lock upper arm. Squeeze at extension." },
-    ],
-  },
-  {
-    name: "Pull", tag: "Back · Biceps · Rear Delts", color: "#3B82F6",
-    exercises: [
-      { name: "Pull-Ups (Weighted if possible)", sets: "4", reps: "6–10", rest: "2 min", notes: "Full dead hang to chin over bar. Add weight via backpack." },
-      { name: "Dumbbell Rows", sets: "4", reps: "8–10", rest: "90 sec", notes: "One arm at a time. Pull to hip, not chest." },
-      { name: "Chest-Supported Incline Row", sets: "3", reps: "10–12", rest: "90 sec", notes: "Lie face-down on incline bench. Great for upper back." },
-      { name: "Chin-Ups", sets: "3", reps: "AMRAP", rest: "2 min", notes: "Supinated grip. Excellent bicep + back builder." },
-      { name: "Dumbbell Reverse Flyes", sets: "4", reps: "12–15", rest: "60 sec", notes: "Bent over or chest-supported. Rear delts are key." },
-      { name: "Dumbbell Bicep Curls", sets: "3", reps: "10–12", rest: "60 sec", notes: "Alternating. No swinging — strict form." },
-      { name: "Incline Dumbbell Curls", sets: "3", reps: "10–12", rest: "60 sec", notes: "Sit on incline bench. Long head stretch." },
-    ],
-  },
-  {
-    name: "Legs", tag: "Quads · Hamstrings · Glutes · Calves", color: "#10B981",
-    exercises: [
-      { name: "Dumbbell Bulgarian Split Squats", sets: "4", reps: "8–10 /leg", rest: "90 sec", notes: "Rear foot on bench. THE king of dumbbell leg exercises." },
-      { name: "Dumbbell Romanian Deadlifts", sets: "4", reps: "10–12", rest: "90 sec", notes: "Hinge at hips. Feel the hamstring stretch." },
-      { name: "Dumbbell Goblet Squats", sets: "3", reps: "12–15", rest: "90 sec", notes: "Hold one heavy dumbbell at chest. Deep squat." },
-      { name: "Dumbbell Step-Ups", sets: "3", reps: "10–12 /leg", rest: "60 sec", notes: "Use bench height. Drive through front foot only." },
-      { name: "Dumbbell Hip Thrusts", sets: "3", reps: "12–15", rest: "60 sec", notes: "Back on bench. Squeeze glutes hard at top." },
-      { name: "Single-Leg Calf Raises", sets: "4", reps: "15–20", rest: "45 sec", notes: "Hold dumbbell. Full ROM — stretch & squeeze." },
-      { name: "Dumbbell Lunges (Walking)", sets: "3", reps: "12 /leg", rest: "60 sec", notes: "Long strides for glute emphasis, short for quads." },
-    ],
-  },
+var SCHEDULE=[{day:"Mon",workout:"Push",idx:0},{day:"Tue",workout:"Pull",idx:1},{day:"Wed",workout:"Legs",idx:2},{day:"Thu",workout:"Rest",idx:-1},{day:"Fri",workout:"Push",idx:0},{day:"Sat",workout:"Pull",idx:1},{day:"Sun",workout:"Legs",idx:2}];
+
+var GEAR=[
+{name:"Resistance Bands Set",price:"$15\u201330",why:"Replaces cable machine for face pulls, tricep pushdowns, lateral raises, and banded leg curls. Huge value."},
+{name:"Dip Belt or Heavy Backpack",price:"$20\u201335",why:"Makes pull-ups and chin-ups progressively overloadable \u2014 essential for back & arm growth."},
+{name:"Adjustable Dumbbells (heavier)",price:"$80\u2013200",why:"If your current dumbbells max out, you'll stall. Progressive overload is non-negotiable."}
 ];
 
-const SCHEDULE = [
-  { day: "Mon", workout: "Push", idx: 0 },
-  { day: "Tue", workout: "Pull", idx: 1 },
-  { day: "Wed", workout: "Legs", idx: 2 },
-  { day: "Thu", workout: "Rest", idx: -1 },
-  { day: "Fri", workout: "Push", idx: 0 },
-  { day: "Sat", workout: "Pull", idx: 1 },
-  { day: "Sun", workout: "Legs", idx: 2 },
+var MOBILITY=[{name:"Push",color:"#E8453C",desc:"Open up shoulders and thoracic spine for safe full-range pressing.",time:"~4 min",exercises:[
+{name:"Shoulder Dislocates (Band/Towel)",sets:"2",reps:"10",rest:"\u2014",notes:"Wide grip, slow full arc overhead and behind.",detail:{mediaUrl:"",formCues:["Wide grip on band or towel","Slow controlled arc \u2014 overhead and all the way behind","Keep arms straight throughout","Gradually narrow grip as mobility improves"],mistakes:["Going too fast","Grip too narrow before ready","Bending elbows to cheat"],muscles:{primary:["Shoulder capsule","Rotator cuff"],secondary:["Chest","Lats"]}}},
+{name:"Thoracic Rotations",sets:"1",reps:"8 /side",rest:"\u2014",notes:"Quadruped. Hand behind head, rotate open toward ceiling.",detail:{mediaUrl:"",formCues:["On all fours, hand behind head","Rotate elbow toward ceiling, opening chest","Follow elbow with your eyes","Hold open position 1\u20132 seconds"],mistakes:["Rotating from lower back","Moving too fast","Shifting hips side to side"],muscles:{primary:["Thoracic spine"],secondary:["Obliques","Rear delts"]}}},
+{name:"Scapular Push-Ups",sets:"1",reps:"12",rest:"\u2014",notes:"Plank position. Protract and retract shoulder blades only.",detail:{mediaUrl:"",formCues:["High plank, arms locked straight","Let chest sink between shoulder blades","Push floor away, rounding upper back","Only shoulder blades should move"],mistakes:["Bending elbows \u2014 NOT a push-up","Moving too fast","Sagging hips"],muscles:{primary:["Serratus anterior"],secondary:["Core"]}}},
+{name:"Light Warm-Up Sets",sets:"2",reps:"12\u201315",rest:"30 sec",notes:"First exercise at ~40% then ~60% working weight.",detail:{mediaUrl:"",formCues:["Use first pressing exercise of the day","First set ~40%, second ~60% working weight","Focus on perfect form, not effort"],mistakes:["Going too heavy","Skipping this \u2014 cold pressing leads to shoulder injuries"],muscles:{primary:["Target muscles for the day"],secondary:[]}}}
+]},{name:"Pull",color:"#3B82F6",desc:"Decompress the spine and prime lats and scapular retractors.",time:"~4 min",exercises:[
+{name:"Dead Hang",sets:"2",reps:"20\u201330 sec",rest:"\u2014",notes:"Full relaxed hang from pull-up bar. Decompresses spine.",detail:{mediaUrl:"",formCues:["Overhand grip, fully relaxed shoulders","Let body hang like dead weight","Focus on breathing deeply","Feel the stretch through lats and spine"],mistakes:["Tensing shoulders","Gripping too tight","Swinging"],muscles:{primary:["Lats","Spine decompression"],secondary:["Grip","Shoulders"]}}},
+{name:"Thoracic Extension over Bench",sets:"1",reps:"10",rest:"\u2014",notes:"Upper back on bench edge. Arms overhead, extend back.",detail:{mediaUrl:"",formCues:["Sit on floor, upper back on bench edge","Hands behind head or arms overhead","Let upper back extend over the edge","Feel each vertebra mobilize"],mistakes:["Extending from lower back","Going too aggressively","Holding breath"],muscles:{primary:["Thoracic spine"],secondary:["Lats"]}}},
+{name:"Band Pull-Aparts",sets:"2",reps:"15",rest:"\u2014",notes:"Arms forward, pull band to chest height.",detail:{mediaUrl:"",formCues:["Hold band at shoulder height, arms straight","Pull apart by squeezing shoulder blades","End: arms out to sides, band at chest","1 second hold at the end"],mistakes:["Bending elbows","Shrugging shoulders","Band too heavy"],muscles:{primary:["Rear delts","Rhomboids"],secondary:["Mid traps"]}}},
+{name:"Light Warm-Up Sets",sets:"2",reps:"8\u201310",rest:"30 sec",notes:"Easy pull-ups or light rows at ~50% effort.",detail:{mediaUrl:"",formCues:["Use first pulling exercise of the day","~50% effort \u2014 easy and smooth","Feel lats engage","Get blood flowing"],mistakes:["Treating it like a working set","Skipping it"],muscles:{primary:["Back","Biceps"],secondary:[]}}}
+]},{name:"Legs",color:"#10B981",desc:"Unlock hips and ankles for deep squats and clean hinges.",time:"~5 min",exercises:[
+{name:"90/90 Hip Switches",sets:"1",reps:"8 /side",rest:"\u2014",notes:"Seated, rotate legs side to side. Opens hip rotation.",detail:{mediaUrl:"",formCues:["Sit on floor, both knees bent 90\xb0","Rotate both legs to one side","Switch to other side controlled","Keep torso tall"],mistakes:["Leaning back excessively","Forcing range of motion","Moving too fast"],muscles:{primary:["Hip rotators"],secondary:["Glutes","Adductors"]}}},
+{name:"Half-Kneeling Hip Flexor Stretch",sets:"1",reps:"30 sec /side",rest:"\u2014",notes:"Squeeze rear glute, tuck pelvis under.",detail:{mediaUrl:"",formCues:["Rear knee on floor, front foot flat","Squeeze rear-side glute HARD","Tuck pelvis under (posterior tilt)","Raise same-side arm overhead for more stretch"],mistakes:["Not squeezing glute","Arching lower back","Leaning forward"],muscles:{primary:["Hip flexors (psoas)"],secondary:["Quads (rectus femoris)"]}}},
+{name:"Bodyweight Deep Squat Hold",sets:"2",reps:"20 sec",rest:"\u2014",notes:"Heels down, elbows pushing knees out.",detail:{mediaUrl:"",formCues:["Feet shoulder-width, toes slightly out","Squat deep with heels on floor","Elbows inside knees, gently pushing out","Hold doorframe for balance if needed"],mistakes:["Heels lifting","Rounding lower back","Holding breath"],muscles:{primary:["Hips","Ankles"],secondary:["Quads","Adductors"]}}},
+{name:"Ankle Rocks",sets:"1",reps:"10 /side",rest:"\u2014",notes:"Foot flat, drive knee over toes.",detail:{mediaUrl:"",formCues:["Half-kneeling, front foot flat","Drive front knee forward over toes","Keep heel glued to floor","Rock back and repeat"],mistakes:["Heel lifting","Going too fast","Foot not straight"],muscles:{primary:["Ankle dorsiflexors"],secondary:["Calves (stretch)"]}}},
+{name:"Glute Bridges",sets:"1",reps:"10",rest:"\u2014",notes:"3 sec squeeze at top.",detail:{mediaUrl:"",formCues:["Lie on back, feet flat, knees at 90\xb0","Drive hips up squeezing glutes","Hold top 3 seconds","Don't hyperextend"],mistakes:["Pushing through toes","Arching lower back at top","Not actually squeezing"],muscles:{primary:["Glutes"],secondary:["Hamstrings","Core"]}}}
+]}];
+
+var POSTURE=[
+{name:"Chin Tucks",sets:"3",reps:"12",rest:"\u2014",target:"Forward Head",notes:"Pull chin straight back (double chin). Hold 2 sec. #1 for jawline and alignment.",detail:{mediaUrl:"",formCues:["Stand or sit tall against a wall","Pull chin straight back \u2014 horizontal, not down","Make a double chin \u2014 that means it's right","Hold 2 seconds, release, repeat"],mistakes:["Tilting head down \u2014 movement is horizontal","Not going far enough \u2014 exaggerate the double chin","Doing it too fast"],muscles:{primary:["Deep neck flexors"],secondary:["Suboccipitals"]}}},
+{name:"Deep Neck Flexor Hold",sets:"3",reps:"15 sec",rest:"15 sec",target:"Forward Head",notes:"Lie face-up. Tuck chin, lift head 1 inch off floor.",detail:{mediaUrl:"",formCues:["Lie on your back on the floor","Tuck your chin (same as chin tuck)","Lift head barely 1 inch off floor","Feel front of neck working, not the top"],mistakes:["Lifting too high \u2014 recruits wrong muscles","Not tucking chin first","Holding breath"],muscles:{primary:["Deep neck flexors"],secondary:[]}}},
+{name:"Wall Angels",sets:"3",reps:"10 (slow)",rest:"\u2014",target:"Rounded Shoulders",notes:"Back on wall, arms in W. Slide to Y and back. Keep wrists and elbows touching wall.",detail:{mediaUrl:"",formCues:["Back, butt, and head touching wall","Arms in W \u2014 elbows at 90\xb0, backs of hands on wall","Slide up to Y, keeping everything touching wall","3 seconds up, 3 seconds down"],mistakes:["Lower back arching off wall \u2014 tuck pelvis","Wrists/elbows losing contact \u2014 reduce range","Going too fast"],muscles:{primary:["Lower traps","Serratus anterior"],secondary:["Rotator cuff","Thoracic extensors"]}}},
+{name:"Doorway Chest Stretch",sets:"2",reps:"30 sec /side",rest:"\u2014",target:"Rounded Shoulders",notes:"Forearm on doorframe at 90\xb0, step through. Both high and low angles.",detail:{mediaUrl:"",formCues:["Forearm vertical on doorframe, elbow at shoulder height","Step through with same-side foot","Feel stretch across chest and front shoulder","Do second round with arm higher"],mistakes:["Forcing the stretch","Twisting torso \u2014 stay square","Only one angle \u2014 hit both"],muscles:{primary:["Pec major","Pec minor"],secondary:["Front delts"]}}},
+{name:"Thoracic Extension (Towel Roll)",sets:"2",reps:"30 sec",rest:"\u2014",target:"Upper Back Rounding",notes:"Towel under upper back, lie over it arms overhead. Reverses desk hunch.",detail:{mediaUrl:"",formCues:["Roll bath towel into firm cylinder","Place horizontally across upper back (between shoulder blades)","Lie back, arms overhead","Breathe deeply and let gravity open your chest"],mistakes:["Placing roll on lower back","Tensing up \u2014 relax into it","Not holding long enough"],muscles:{primary:["Thoracic extensors"],secondary:["Chest (passive)","Lats (passive)"]}}},
+{name:"Half-Kneeling Hip Flexor Stretch",sets:"2",reps:"30 sec /side",rest:"\u2014",target:"Anterior Pelvic Tilt",notes:"Squeeze glute HARD, tuck pelvis under. Tight hip flexors make you look shorter.",detail:{mediaUrl:"",formCues:["Rear knee on pad, front foot flat","Squeeze rear glute as hard as you can","Tuck pelvis under \u2014 posterior tilt","Raise same-side arm overhead and lean slightly away"],mistakes:["Not engaging the glute","Arching back \u2014 you want pelvis tucked","Rushing \u2014 hold full 30 seconds"],muscles:{primary:["Hip flexors (psoas)"],secondary:["Rectus femoris","TFL"]}}},
+{name:"Glute Bridge with 3s Hold",sets:"2",reps:"10",rest:"\u2014",target:"Anterior Pelvic Tilt",notes:"Squeeze glutes 3 seconds per rep. Counteracts hip flexor pull.",detail:{mediaUrl:"",formCues:["Lie on back, feet flat, knees 90\xb0","Drive hips up through heels","Squeeze glutes as hard as possible for 3 seconds","Think: tilt belt buckle toward chin"],mistakes:["Hyperextending the back at the top","Not squeezing long enough","Pushing through toes"],muscles:{primary:["Glutes"],secondary:["Hamstrings","Core"]}}}
 ];
 
-const GEAR = [
-  { name: "Resistance Bands Set", price: "$15–30", why: "Replaces cable machine for face pulls, tricep pushdowns, lateral raises, and banded leg curls. Huge value." },
-  { name: "Dip Belt or Heavy Backpack", price: "$20–35", why: "Makes pull-ups and chin-ups progressively overloadable — essential for back & arm growth." },
-  { name: "Adjustable Dumbbells (heavier)", price: "$80–200", why: "If your current dumbbells max out, you'll stall. Progressive overload is non-negotiable." },
-];
+/* STATE */
+var activeSection='workout',activeDay=0,gearOpen=false;
+var checked={},mobilityChecked={},postureChecked={};
 
-const MOBILITY = [
-  {
-    name: "Push", color: "#E8453C",
-    desc: "Open up shoulders and thoracic spine so you can press safely through full range of motion.",
-    time: "~4 min",
-    exercises: [
-      { name: "Shoulder Dislocates (Band/Towel)", sets: "2", reps: "10", rest: "—", notes: "Wide grip, slow full arc overhead and behind. Opens shoulder capsule for pressing." },
-      { name: "Thoracic Rotations", sets: "1", reps: "8 /side", rest: "—", notes: "Quadruped position. Hand behind head, rotate open toward ceiling. Opens upper back." },
-      { name: "Scapular Push-Ups", sets: "1", reps: "12", rest: "—", notes: "Plank position. Protract and retract shoulder blades only. Wakes up serratus anterior." },
-      { name: "Light Warm-Up Sets", sets: "2", reps: "12–15", rest: "30 sec", notes: "First exercise at ~40% then ~60% working weight. Groove the movement pattern." },
-    ],
-  },
-  {
-    name: "Pull", color: "#3B82F6",
-    desc: "Decompress the spine and prime your lats and scapular retractors for pulling movements.",
-    time: "~4 min",
-    exercises: [
-      { name: "Dead Hang", sets: "2", reps: "20–30 sec", rest: "—", notes: "Full relaxed hang from pull-up bar. Decompresses spine, stretches lats and grip." },
-      { name: "Thoracic Extension over Bench", sets: "1", reps: "10", rest: "—", notes: "Upper back on bench edge. Arms overhead, extend back and return. Opens thoracic spine." },
-      { name: "Band Pull-Aparts", sets: "2", reps: "15", rest: "—", notes: "Arms straight forward, pull band to chest height. Fires up rear delts and rhomboids." },
-      { name: "Light Warm-Up Sets", sets: "2", reps: "8–10", rest: "30 sec", notes: "Easy pull-ups or light dumbbell rows at ~50% effort. Get blood flowing." },
-    ],
-  },
-  {
-    name: "Legs", color: "#10B981",
-    desc: "Unlock hips and ankles so you can squat deep and hinge without compensation patterns.",
-    time: "~5 min",
-    exercises: [
-      { name: "90/90 Hip Switches", sets: "1", reps: "8 /side", rest: "—", notes: "Seated on floor, rotate both legs side to side. Opens hip internal and external rotation." },
-      { name: "Half-Kneeling Hip Flexor Stretch", sets: "1", reps: "30 sec /side", rest: "—", notes: "Squeeze rear glute, tuck pelvis under. Feel this deep in the front hip." },
-      { name: "Bodyweight Deep Squat Hold", sets: "2", reps: "20 sec", rest: "—", notes: "Heels down, elbows pushing knees out. Hold a doorframe for balance if needed." },
-      { name: "Ankle Rocks", sets: "1", reps: "10 /side", rest: "—", notes: "Foot flat, drive knee over toes. Critical for deep squat mechanics." },
-      { name: "Glute Bridges", sets: "1", reps: "10", rest: "—", notes: "3 sec squeeze at top. Fires up glutes before heavy compound lifts." },
-    ],
-  },
-];
-
-const POSTURE = [
-  {
-    name: "Chin Tucks", sets: "3", reps: "12", rest: "—",
-    target: "Forward Head",
-    notes: "Pull chin straight back (make a double chin). Hold 2 sec each rep. THE #1 exercise for jawline and head-over-spine alignment.",
-  },
-  {
-    name: "Deep Neck Flexor Hold", sets: "3", reps: "15 sec", rest: "15 sec",
-    target: "Forward Head",
-    notes: "Lie face-up. Tuck chin, lift head 1 inch off floor and hold. Strengthens the muscles that keep your head stacked over your spine.",
-  },
-  {
-    name: "Wall Angels", sets: "3", reps: "10 (slow)", rest: "—",
-    target: "Rounded Shoulders",
-    notes: "Back flat on wall, arms in 'W'. Slide up to 'Y' and back down. Keep wrists and elbows touching wall the entire time — harder than it sounds.",
-  },
-  {
-    name: "Doorway Chest Stretch", sets: "2", reps: "30 sec /side", rest: "—",
-    target: "Rounded Shoulders",
-    notes: "Forearm on doorframe at 90°, step through gently. Do at both high and low arm angles. Opens the pecs pulling your shoulders forward.",
-  },
-  {
-    name: "Thoracic Extension (Towel Roll)", sets: "2", reps: "30 sec", rest: "—",
-    target: "Upper Back Rounding",
-    notes: "Roll up a towel, place under upper back, lie over it arms overhead. Or use bench edge. Directly reverses desk-posture hunch — this is what makes you look taller.",
-  },
-  {
-    name: "Half-Kneeling Hip Flexor Stretch", sets: "2", reps: "30 sec /side", rest: "—",
-    target: "Anterior Pelvic Tilt",
-    notes: "Rear knee down, squeeze that side's glute HARD, tuck pelvis under. Tight hip flexors tilt your pelvis forward — looks like a gut and shortens your frame.",
-  },
-  {
-    name: "Glute Bridge with 3s Hold", sets: "2", reps: "10", rest: "—",
-    target: "Anterior Pelvic Tilt",
-    notes: "Squeeze glutes at top for 3 full seconds per rep. Strengthens glutes to counteract hip flexor pull. Think: tilt belt buckle toward chin.",
-  },
-];
-
-/* ═══ STATE ═══ */
-
-let activeSection = 'workout';
-let activeDay = 0;
-let gearOpen = false;
-const checked = {};
-const mobilityChecked = {};
-const postureChecked = {};
-
-/* ═══ RENDER HELPERS ═══ */
-
-function renderCard(ex, i, colorHex, prefix, checkedMap) {
-  const isChecked = !!checkedMap[`${prefix}-${i}`];
-  const c = colorHex;
-  let metaHTML = '';
-  [
-    { label: "Sets", val: ex.sets },
-    { label: "Reps", val: ex.reps },
-    { label: "Rest", val: ex.rest },
-  ].forEach(m => {
-    if (m.val && m.val !== '—') {
-      metaHTML += `<span class="meta-item"><span class="meta-label">${m.label}</span><span class="meta-value" style="color:${isChecked ? 'var(--text-faint)' : c}">${m.val}</span></span>`;
-    }
-  });
-
-  const badge = ex.target
-    ? `<span class="target-badge" style="background:${c}15;color:${c}">${ex.target}</span>` : '';
-
-  return `<div class="exercise-card ${isChecked ? 'checked' : ''} animate-in" data-idx="${i}"
-    style="background:${isChecked ? c + '08' : 'var(--card)'};
-           border-color:${isChecked ? c + '30' : 'var(--card-border)'};
-           animation-delay:${i * 0.04}s">
-    <div class="checkbox" style="border-color:${isChecked ? c : '#333'};background:${isChecked ? c : 'transparent'};">
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-    <div class="exercise-content">
-      <div class="exercise-name">${ex.name}${badge}</div>
-      <div class="exercise-meta">${metaHTML}</div>
-      <div class="exercise-notes">${ex.notes}</div>
-    </div>
-  </div>`;
-}
-
-function bindCards(container, prefix, checkedMap, renderFn) {
-  container.querySelectorAll('.exercise-card').forEach(card => {
-    card.addEventListener('click', () => {
-      checkedMap[`${prefix}-${card.dataset.idx}`] = !checkedMap[`${prefix}-${card.dataset.idx}`];
-      renderFn();
-    });
-  });
-}
-
-/* ═══ SECTION RENDERERS ═══ */
-
-function renderWorkout() {
-  const current = DAYS[activeDay];
-
-  const bar = document.getElementById('scheduleBar');
-  bar.innerHTML = SCHEDULE.map((s, i) => {
-    const isRest = s.idx === -1;
-    const isActive = !isRest && s.idx === activeDay;
-    const c = isRest ? '#333' : DAYS[s.idx].color;
-    return `<button class="schedule-btn ${isRest ? 'rest' : ''} ${isActive ? 'active' : ''}"
-      data-idx="${s.idx}" style="background:${isActive ? c + '18' : 'transparent'}">
-      <span class="day-label" style="color:${isRest ? '#444' : isActive ? c : '#666'}">${s.day}</span>
-      <span class="day-workout" style="color:${isRest ? '#333' : isActive ? c : '#555'}">${s.workout}</span>
-      <span class="dot" style="background:${c}"></span>
-    </button>`;
-  }).join('');
-  bar.querySelectorAll('.schedule-btn:not(.rest)').forEach(btn => {
-    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); renderAll(); });
-  });
-
-  const tabs = document.getElementById('dayTabs');
-  tabs.innerHTML = DAYS.map((d, i) => {
-    const a = i === activeDay;
-    return `<button class="day-tab" data-idx="${i}" style="border-color:${a ? d.color + '55' : '#222'};background:${a ? d.color + '10' : 'var(--card)'};">
-      <div class="day-tab-name" style="color:${a ? d.color : 'var(--text-muted)'}">${d.name}</div>
-      <div class="day-tab-tag" style="color:${a ? '#999' : 'var(--text-ghost)'}">${d.tag}</div>
-    </button>`;
-  }).join('');
-  tabs.querySelectorAll('.day-tab').forEach(btn => {
-    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); renderAll(); });
-  });
-
-  const cc = current.exercises.filter((_, i) => checked[`w${activeDay}-${i}`]).length;
-  document.getElementById('progressFill').style.width = (cc / current.exercises.length * 100) + '%';
-  document.getElementById('progressFill').style.background = current.color;
-  document.getElementById('progressCount').textContent = `${cc}/${current.exercises.length}`;
-
-  const list = document.getElementById('exerciseList');
-  list.innerHTML = current.exercises.map((ex, i) => renderCard(ex, i, current.color, `w${activeDay}`, checked)).join('');
-  bindCards(list, `w${activeDay}`, checked, renderWorkout);
-
-  document.getElementById('gearList').innerHTML = GEAR.map(g => `
-    <div class="gear-card">
-      <div class="gear-header"><span class="gear-name">${g.name}</span><span class="gear-price">${g.price}</span></div>
-      <div class="gear-why">${g.why}</div>
-    </div>`).join('');
-}
-
-function renderMobility() {
-  const mob = MOBILITY[activeDay];
-
-  const tabs = document.getElementById('mobilityDayTabs');
-  tabs.innerHTML = MOBILITY.map((d, i) => {
-    const a = i === activeDay;
-    return `<button class="day-tab" data-idx="${i}" style="border-color:${a ? d.color + '55' : '#222'};background:${a ? d.color + '10' : 'var(--card)'};">
-      <div class="day-tab-name" style="color:${a ? d.color : 'var(--text-muted)'}">${d.name}</div>
-      <div class="day-tab-tag" style="color:${a ? '#999' : 'var(--text-ghost)'}">Mobility</div>
-    </button>`;
-  }).join('');
-  tabs.querySelectorAll('.day-tab').forEach(btn => {
-    btn.addEventListener('click', () => { activeDay = parseInt(btn.dataset.idx); renderAll(); });
-  });
-
-  document.getElementById('mobilityHeader').innerHTML = `
-    <div class="section-title" style="color:#F59E0B">Pre-Workout: ${mob.name} Day</div>
-    <div class="section-desc">${mob.desc}</div>
-    <div class="section-time" style="color:#F59E0B">${mob.time}</div>`;
-
-  const cc = mob.exercises.filter((_, i) => mobilityChecked[`m${activeDay}-${i}`]).length;
-  document.getElementById('mobilityProgressFill').style.width = (cc / mob.exercises.length * 100) + '%';
-  document.getElementById('mobilityProgressFill').style.background = '#F59E0B';
-  document.getElementById('mobilityProgressCount').textContent = `${cc}/${mob.exercises.length}`;
-
-  const list = document.getElementById('mobilityList');
-  list.innerHTML = mob.exercises.map((ex, i) => renderCard(ex, i, mob.color, `m${activeDay}`, mobilityChecked)).join('');
-  bindCards(list, `m${activeDay}`, mobilityChecked, renderMobility);
-}
-
-function renderPosture() {
-  const c = '#A855F7';
-  const cc = POSTURE.filter((_, i) => postureChecked[`p-${i}`]).length;
-  document.getElementById('postureProgressFill').style.width = (cc / POSTURE.length * 100) + '%';
-  document.getElementById('postureProgressFill').style.background = c;
-  document.getElementById('postureProgressCount').textContent = `${cc}/${POSTURE.length}`;
-
-  const list = document.getElementById('postureList');
-  list.innerHTML = POSTURE.map((ex, i) => renderCard(ex, i, c, 'p', postureChecked)).join('');
-  bindCards(list, 'p', postureChecked, renderPosture);
-}
-
-/* ═══ SECTION SWITCHING ═══ */
-
-function switchSection(section) {
-  activeSection = section;
-  document.querySelectorAll('.section-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.section === section);
-  });
-  document.getElementById('workoutSection').classList.toggle('hidden', section !== 'workout');
-  document.getElementById('mobilitySection').classList.toggle('hidden', section !== 'mobility');
-  document.getElementById('postureSection').classList.toggle('hidden', section !== 'posture');
-
-  const label = document.getElementById('topLabel');
-  if (section === 'workout') {
-    label.style.color = DAYS[activeDay].color;
-    label.textContent = 'Hypertrophy Program';
-  } else if (section === 'mobility') {
-    label.style.color = '#F59E0B';
-    label.textContent = 'Pre-Workout Mobility';
-  } else {
-    label.style.color = '#A855F7';
-    label.textContent = 'Posture Correction';
+/* MODAL */
+function openModal(ex,color){
+  var d=ex.detail;if(!d)return;
+  document.getElementById('modalTitle').textContent=ex.name;
+  document.getElementById('modalTitle').style.color=color;
+  document.getElementById('modalSubtitle').textContent=ex.target||ex.sets+' sets \xd7 '+ex.reps;
+  var media=document.getElementById('modalMedia');
+  if(d.mediaUrl){
+    var isVid=d.mediaUrl.endsWith('.mp4')||d.mediaUrl.endsWith('.webm');
+    media.innerHTML=isVid?'<video src="'+d.mediaUrl+'" autoplay loop muted playsinline></video>':'<img src="'+d.mediaUrl+'" alt="'+ex.name+'">';
+  }else{
+    media.innerHTML='<span class="placeholder-icon">&#127916;</span><span>Add your own GIF or image</span><span class="placeholder-text">Set mediaUrl in exercise data</span>';
   }
-}
-
-function renderAll() {
-  if (activeSection === 'workout') {
-    document.getElementById('topLabel').style.color = DAYS[activeDay].color;
+  var h='';
+  if(d.formCues&&d.formCues.length){
+    h+='<div class="modal-section"><div class="modal-section-title" style="color:'+color+'">&#10003; Form Cues</div><div class="cue-list">';
+    d.formCues.forEach(function(c){h+='<div class="cue-item"><span class="cue-icon good">&#10003;</span><span>'+c+'</span></div>';});
+    h+='</div></div>';
   }
-  renderWorkout();
-  renderMobility();
-  renderPosture();
+  if(d.mistakes&&d.mistakes.length){
+    h+='<div class="modal-section"><div class="modal-section-title" style="color:#E8453C">&#10007; Common Mistakes</div><div class="cue-list">';
+    d.mistakes.forEach(function(m){h+='<div class="cue-item"><span class="cue-icon bad">&#10007;</span><span>'+m+'</span></div>';});
+    h+='</div></div>';
+  }
+  if(d.muscles){
+    h+='<div class="modal-section"><div class="modal-section-title">Muscles Worked</div><div class="muscle-tags">';
+    (d.muscles.primary||[]).forEach(function(m){h+='<span class="muscle-tag primary" style="border-color:'+color+'50">'+m+'</span>';});
+    (d.muscles.secondary||[]).forEach(function(m){h+='<span class="muscle-tag">'+m+'</span>';});
+    h+='</div></div>';
+  }
+  document.getElementById('modalBody').innerHTML=h;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===document.getElementById('modalOverlay'))closeModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+/* RENDER HELPERS */
+function renderCard(ex,i,c,prefix,cmap){
+  var ck=!!cmap[prefix+'-'+i];
+  var meta='';
+  [{l:'Sets',v:ex.sets},{l:'Reps',v:ex.reps},{l:'Rest',v:ex.rest}].forEach(function(m){
+    if(m.v&&m.v!=='\u2014')meta+='<span class="meta-item"><span class="meta-label">'+m.l+'</span><span class="meta-value" style="color:'+(ck?'var(--text-faint)':c)+'">'+m.v+'</span></span>';
+  });
+  var badge=ex.target?'<span class="target-badge" style="background:'+c+'15;color:'+c+'">'+ex.target+'</span>':'';
+  var info=ex.detail?'<button class="info-btn" data-info="'+i+'">i</button>':'';
+  return '<div class="exercise-card '+(ck?'checked':'')+' animate-in" data-idx="'+i+'" style="background:'+(ck?c+'08':'var(--card)')+';border-color:'+(ck?c+'30':'var(--card-border)')+';animation-delay:'+i*0.04+'s">'+info+'<div class="checkbox" style="border-color:'+(ck?c:'#333')+';background:'+(ck?c:'transparent')+';"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="exercise-content"><div class="exercise-name">'+ex.name+badge+'</div><div class="exercise-meta">'+meta+'</div><div class="exercise-notes">'+ex.notes+'</div></div></div>';
 }
 
-/* ═══ INIT ═══ */
+function bindCards(el,prefix,cmap,exercises,color,renderFn){
+  el.querySelectorAll('.exercise-card').forEach(function(card){
+    card.addEventListener('click',function(e){if(e.target.closest('.info-btn'))return;cmap[prefix+'-'+card.dataset.idx]=!cmap[prefix+'-'+card.dataset.idx];renderFn();});
+  });
+  el.querySelectorAll('.info-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){e.stopPropagation();openModal(exercises[parseInt(btn.dataset.info)],color);});
+  });
+}
 
-document.querySelectorAll('.section-btn').forEach(btn => {
-  btn.addEventListener('click', () => switchSection(btn.dataset.section));
-});
+/* RENDERERS */
+function renderWorkout(){
+  var cur=DAYS[activeDay];
+  var bar=document.getElementById('scheduleBar');
+  bar.innerHTML=SCHEDULE.map(function(s,i){var r=s.idx===-1,a=!r&&s.idx===activeDay,c=r?'#333':DAYS[s.idx].color;return '<button class="schedule-btn '+(r?'rest':'')+' '+(a?'active':'')+'" data-idx="'+s.idx+'" style="background:'+(a?c+'18':'transparent')+'"><span class="day-label" style="color:'+(r?'#444':a?c:'#666')+'">'+s.day+'</span><span class="day-workout" style="color:'+(r?'#333':a?c:'#555')+'">'+s.workout+'</span><span class="dot" style="background:'+c+'"></span></button>';}).join('');
+  bar.querySelectorAll('.schedule-btn:not(.rest)').forEach(function(b){b.addEventListener('click',function(){activeDay=parseInt(b.dataset.idx);renderAll();});});
+  var tabs=document.getElementById('dayTabs');
+  tabs.innerHTML=DAYS.map(function(d,i){var a=i===activeDay;return '<button class="day-tab" data-idx="'+i+'" style="border-color:'+(a?d.color+'55':'#222')+';background:'+(a?d.color+'10':'var(--card)')+'"><div class="day-tab-name" style="color:'+(a?d.color:'var(--text-muted)')+'">'+d.name+'</div><div class="day-tab-tag" style="color:'+(a?'#999':'var(--text-ghost)')+'">'+d.tag+'</div></button>';}).join('');
+  tabs.querySelectorAll('.day-tab').forEach(function(b){b.addEventListener('click',function(){activeDay=parseInt(b.dataset.idx);renderAll();});});
+  var cc=cur.exercises.filter(function(_,i){return checked['w'+activeDay+'-'+i];}).length;
+  document.getElementById('progressFill').style.width=(cc/cur.exercises.length*100)+'%';
+  document.getElementById('progressFill').style.background=cur.color;
+  document.getElementById('progressCount').textContent=cc+'/'+cur.exercises.length;
+  var list=document.getElementById('exerciseList');
+  list.innerHTML=cur.exercises.map(function(ex,i){return renderCard(ex,i,cur.color,'w'+activeDay,checked);}).join('');
+  bindCards(list,'w'+activeDay,checked,cur.exercises,cur.color,renderWorkout);
+  document.getElementById('gearList').innerHTML=GEAR.map(function(g){return '<div class="gear-card"><div class="gear-header"><span class="gear-name">'+g.name+'</span><span class="gear-price">'+g.price+'</span></div><div class="gear-why">'+g.why+'</div></div>';}).join('');
+}
 
-document.getElementById('gearToggle').addEventListener('click', () => {
-  gearOpen = !gearOpen;
-  document.getElementById('gearList').classList.toggle('open', gearOpen);
-  document.getElementById('gearArrow').classList.toggle('open', gearOpen);
-});
+function renderMobility(){
+  var mob=MOBILITY[activeDay];
+  var tabs=document.getElementById('mobilityDayTabs');
+  tabs.innerHTML=MOBILITY.map(function(d,i){var a=i===activeDay;return '<button class="day-tab" data-idx="'+i+'" style="border-color:'+(a?d.color+'55':'#222')+';background:'+(a?d.color+'10':'var(--card)')+'"><div class="day-tab-name" style="color:'+(a?d.color:'var(--text-muted)')+'">'+d.name+'</div><div class="day-tab-tag" style="color:'+(a?'#999':'var(--text-ghost)')+'">Mobility</div></button>';}).join('');
+  tabs.querySelectorAll('.day-tab').forEach(function(b){b.addEventListener('click',function(){activeDay=parseInt(b.dataset.idx);renderAll();});});
+  document.getElementById('mobilityHeader').innerHTML='<div class="section-title" style="color:#F59E0B">Pre-Workout: '+mob.name+' Day</div><div class="section-desc">'+mob.desc+'</div><div class="section-time" style="color:#F59E0B">'+mob.time+'</div>';
+  var cc=mob.exercises.filter(function(_,i){return mobilityChecked['m'+activeDay+'-'+i];}).length;
+  document.getElementById('mobilityProgressFill').style.width=(cc/mob.exercises.length*100)+'%';
+  document.getElementById('mobilityProgressFill').style.background='#F59E0B';
+  document.getElementById('mobilityProgressCount').textContent=cc+'/'+mob.exercises.length;
+  var list=document.getElementById('mobilityList');
+  list.innerHTML=mob.exercises.map(function(ex,i){return renderCard(ex,i,mob.color,'m'+activeDay,mobilityChecked);}).join('');
+  bindCards(list,'m'+activeDay,mobilityChecked,mob.exercises,mob.color,renderMobility);
+}
 
+function renderPosture(){
+  var c='#A855F7';
+  var cc=POSTURE.filter(function(_,i){return postureChecked['p-'+i];}).length;
+  document.getElementById('postureProgressFill').style.width=(cc/POSTURE.length*100)+'%';
+  document.getElementById('postureProgressFill').style.background=c;
+  document.getElementById('postureProgressCount').textContent=cc+'/'+POSTURE.length;
+  var list=document.getElementById('postureList');
+  list.innerHTML=POSTURE.map(function(ex,i){return renderCard(ex,i,c,'p',postureChecked);}).join('');
+  bindCards(list,'p',postureChecked,POSTURE,c,renderPosture);
+}
+
+function switchSection(s){
+  activeSection=s;
+  document.querySelectorAll('.section-btn').forEach(function(b){b.classList.toggle('active',b.dataset.section===s);});
+  document.getElementById('workoutSection').classList.toggle('hidden',s!=='workout');
+  document.getElementById('mobilitySection').classList.toggle('hidden',s!=='mobility');
+  document.getElementById('postureSection').classList.toggle('hidden',s!=='posture');
+  var l=document.getElementById('topLabel');
+  if(s==='workout'){l.style.color=DAYS[activeDay].color;l.textContent='Hypertrophy Program';}
+  else if(s==='mobility'){l.style.color='#F59E0B';l.textContent='Pre-Workout Mobility';}
+  else{l.style.color='#A855F7';l.textContent='Posture Correction';}
+}
+
+function renderAll(){
+  if(activeSection==='workout')document.getElementById('topLabel').style.color=DAYS[activeDay].color;
+  renderWorkout();renderMobility();renderPosture();
+}
+
+document.querySelectorAll('.section-btn').forEach(function(b){b.addEventListener('click',function(){switchSection(b.dataset.section);});});
+document.getElementById('gearToggle').addEventListener('click',function(){gearOpen=!gearOpen;document.getElementById('gearList').classList.toggle('open',gearOpen);document.getElementById('gearArrow').classList.toggle('open',gearOpen);});
 renderAll();
 </script>
 </body>
