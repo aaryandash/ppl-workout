@@ -106,6 +106,34 @@ h1{font-family:'Space Mono',monospace;font-size:32px;font-weight:700;letter-spac
 
 @media(min-width:640px){.modal-overlay{align-items:center;padding:20px}.modal{border-radius:20px;border-bottom:1px solid #222;max-height:80vh}}
 @media(max-width:480px){h1{font-size:26px}.day-tab{padding:10px 8px}.day-tab-name{font-size:14px}.exercise-meta{gap:10px}.schedule-btn .day-label{font-size:9px}.schedule-btn .day-workout{font-size:10px}.section-btn{font-size:11px;padding:10px 4px}.modal-title{font-size:17px}.modal-media{margin:12px 16px}.modal-header{padding:16px 16px 0}.modal-body{padding:0 16px 24px}}
+/* Timer button on cards */
+.timer-btn{position:absolute;top:12px;right:44px;width:26px;height:26px;border-radius:50%;border:1.5px solid #2a2a30;background:var(--surface);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2;padding:0}
+.timer-btn:hover{border-color:#555;color:var(--text);background:#1E1E24}
+.timer-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.exercise-card:not([data-has-timer]) .timer-btn{display:none}
+
+/* Floating rest timer bar */
+.rest-timer{position:fixed;bottom:0;left:0;right:0;z-index:90;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);pointer-events:none}
+.rest-timer.active{transform:translateY(0);pointer-events:auto}
+.rest-timer-inner{max-width:680px;margin:0 auto;padding:0 16px 20px}
+.rest-timer-card{background:#1A1A20;border:1px solid #2a2a30;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -4px 30px rgba(0,0,0,.5);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.rest-timer-ring{width:48px;height:48px;flex-shrink:0;position:relative}
+.rest-timer-ring svg{width:48px;height:48px;transform:rotate(-90deg)}
+.rest-timer-ring circle{fill:none;stroke-width:3}
+.rest-timer-ring .ring-bg{stroke:#2a2a30}
+.rest-timer-ring .ring-fg{stroke-linecap:round;transition:stroke-dashoffset .3s linear}
+.rest-timer-time{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:15px;font-weight:700}
+.rest-timer-info{flex:1;min-width:0}
+.rest-timer-name{font-size:13px;font-weight:600;color:#E0E0E8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rest-timer-label{font-size:11px;color:var(--text-muted);margin-top:2px}
+.rest-timer-dismiss{font-size:11px;color:var(--text-ghost);font-family:'Space Mono',monospace;letter-spacing:1px;text-transform:uppercase;flex-shrink:0}
+
+@keyframes timerPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.7;transform:scale(1.02)}}
+.rest-timer.done .rest-timer-card{animation:timerPulse .6s ease infinite;border-color:#10B98160}
+.rest-timer.done .rest-timer-time{color:#10B981}
+.rest-timer.done .rest-timer-label{color:#10B981}
+body.timer-active{padding-bottom:120px}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .animate-in{animation:fadeUp .4s ease forwards;opacity:0}
 </style>
@@ -160,6 +188,22 @@ h1{font-family:'Space Mono',monospace;font-size:32px;font-weight:700;letter-spac
       <span class="placeholder-text">Set mediaUrl in exercise data</span>
     </div>
     <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="rest-timer" id="restTimer">
+  <div class="rest-timer-inner">
+    <div class="rest-timer-card" id="restTimerCard">
+      <div class="rest-timer-ring">
+        <svg viewBox="0 0 48 48"><circle class="ring-bg" cx="24" cy="24" r="20"/><circle class="ring-fg" id="timerRing" cx="24" cy="24" r="20" stroke-dasharray="125.66" stroke-dashoffset="0"/></svg>
+        <div class="rest-timer-time" id="timerTime">0:00</div>
+      </div>
+      <div class="rest-timer-info">
+        <div class="rest-timer-name" id="timerExName"></div>
+        <div class="rest-timer-label" id="timerLabel">Resting...</div>
+      </div>
+      <div class="rest-timer-dismiss">TAP</div>
+    </div>
   </div>
 </div>
 
@@ -230,6 +274,67 @@ var POSTURE=[
 var activeSection='workout',activeDay=0,gearOpen=false;
 var checked={},mobilityChecked={},postureChecked={};
 
+/* REST TIMER */
+var timerInterval=null,timerRemaining=0,timerTotal=0,timerColor='#fff';
+var timerEl=document.getElementById('restTimer');
+var timerRing=document.getElementById('timerRing');
+var timerTime=document.getElementById('timerTime');
+var timerExName=document.getElementById('timerExName');
+var timerLabel=document.getElementById('timerLabel');
+var CIRCUMFERENCE=2*Math.PI*20; // r=20
+
+function parseRestTime(str){
+  if(!str||str==='\u2014')return 0;
+  var m=str.match(/(\d+)\s*(min|sec)/i);
+  if(!m)return 0;
+  return m[2].toLowerCase()==='min'?parseInt(m[1])*60:parseInt(m[1]);
+}
+
+function formatTime(s){
+  var min=Math.floor(s/60),sec=s%60;
+  return min+':'+(sec<10?'0':'')+sec;
+}
+
+function startTimer(seconds,name,color){
+  if(timerInterval)clearInterval(timerInterval);
+  timerTotal=seconds;timerRemaining=seconds;timerColor=color;
+  timerRing.style.stroke=color;
+  timerRing.setAttribute('stroke-dasharray',CIRCUMFERENCE);
+  timerRing.setAttribute('stroke-dashoffset','0');
+  timerTime.textContent=formatTime(timerRemaining);
+  timerTime.style.color=color;
+  timerExName.textContent=name;
+  timerLabel.textContent='Resting...';
+  timerLabel.style.color='';
+  timerEl.classList.remove('done');
+  timerEl.classList.add('active');
+  document.body.classList.add('timer-active');
+
+  timerInterval=setInterval(function(){
+    timerRemaining--;
+    if(timerRemaining<=0){
+      timerRemaining=0;
+      clearInterval(timerInterval);timerInterval=null;
+      timerEl.classList.add('done');
+      timerTime.textContent='GO';
+      timerLabel.textContent='Get back to it!';
+      // Auto-dismiss after 5 seconds
+      setTimeout(function(){if(timerEl.classList.contains('done'))dismissTimer();},5000);
+    }
+    timerTime.textContent=timerRemaining>0?formatTime(timerRemaining):'GO';
+    var pct=timerTotal>0?(timerTotal-timerRemaining)/timerTotal:1;
+    timerRing.setAttribute('stroke-dashoffset',''+CIRCUMFERENCE*pct);
+  },1000);
+}
+
+function dismissTimer(){
+  if(timerInterval){clearInterval(timerInterval);timerInterval=null;}
+  timerEl.classList.remove('active','done');
+  document.body.classList.remove('timer-active');
+}
+
+document.getElementById('restTimerCard').addEventListener('click',dismissTimer);
+
 /* MODAL */
 function openModal(ex,color){
   var d=ex.detail;if(!d)return;
@@ -278,15 +383,21 @@ function renderCard(ex,i,c,prefix,cmap){
   });
   var badge=ex.target?'<span class="target-badge" style="background:'+c+'15;color:'+c+'">'+ex.target+'</span>':'';
   var info=ex.detail?'<button class="info-btn" data-info="'+i+'">i</button>':'';
-  return '<div class="exercise-card '+(ck?'checked':'')+' animate-in" data-idx="'+i+'" style="background:'+(ck?c+'08':'var(--card)')+';border-color:'+(ck?c+'30':'var(--card-border)')+';animation-delay:'+i*0.04+'s">'+info+'<div class="checkbox" style="border-color:'+(ck?c:'#333')+';background:'+(ck?c:'transparent')+';"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="exercise-content"><div class="exercise-name">'+ex.name+badge+'</div><div class="exercise-meta">'+meta+'</div><div class="exercise-notes">'+ex.notes+'</div></div></div>';
+  var hasRest=ex.rest&&ex.rest!=='\u2014';
+  var timer=hasRest?'<button class="timer-btn" data-timer="'+i+'" title="Start rest timer"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2.5 2.5"/></svg></button>':'';
+  var pr=ex.detail?(hasRest?'80px':'48px'):(hasRest?'48px':'16px');
+  return '<div class="exercise-card '+(ck?'checked':'')+' animate-in" data-idx="'+i+'"'+(hasRest?' data-has-timer':'')+' style="background:'+(ck?c+'08':'var(--card)')+';border-color:'+(ck?c+'30':'var(--card-border)')+';animation-delay:'+i*0.04+'s;padding-right:'+pr+'">'+info+timer+'<div class="checkbox" style="border-color:'+(ck?c:'#333')+';background:'+(ck?c:'transparent')+';"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M3 6l2 2 4-4" stroke="#0C0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="exercise-content"><div class="exercise-name">'+ex.name+badge+'</div><div class="exercise-meta">'+meta+'</div><div class="exercise-notes">'+ex.notes+'</div></div></div>';
 }
 
 function bindCards(el,prefix,cmap,exercises,color,renderFn){
   el.querySelectorAll('.exercise-card').forEach(function(card){
-    card.addEventListener('click',function(e){if(e.target.closest('.info-btn'))return;cmap[prefix+'-'+card.dataset.idx]=!cmap[prefix+'-'+card.dataset.idx];renderFn();});
+    card.addEventListener('click',function(e){if(e.target.closest('.info-btn')||e.target.closest('.timer-btn'))return;cmap[prefix+'-'+card.dataset.idx]=!cmap[prefix+'-'+card.dataset.idx];renderFn();});
   });
   el.querySelectorAll('.info-btn').forEach(function(btn){
     btn.addEventListener('click',function(e){e.stopPropagation();openModal(exercises[parseInt(btn.dataset.info)],color);});
+  });
+  el.querySelectorAll('.timer-btn').forEach(function(btn){
+    btn.addEventListener('click',function(e){e.stopPropagation();var ex=exercises[parseInt(btn.dataset.timer)];var secs=parseRestTime(ex.rest);if(secs>0)startTimer(secs,ex.name,color);});
   });
 }
 
